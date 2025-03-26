@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { Line } from "react-chartjs-2";
+import "../components/LineChart.css";
 import {
   Chart as ChartJS,
   LineElement,
@@ -20,7 +21,6 @@ ChartJS.register(
 );
 
 const LineChart = ({ data, loading }) => {
-
   const maxValue = useMemo(() => {
     if (!data?.datasets?.length) return 0;
     return Math.max(...data.datasets.flatMap((ds) => ds.data));
@@ -60,11 +60,29 @@ const LineChart = ({ data, loading }) => {
     },
   };
 
-  if (loading) return <div className="spinner"></div>;
-  if (!data || !data.labels?.length)
-    return <p>No valid products found for this category.</p>;
+  return (
+    <div className="card mt-4 shadow-sm">
+      <div className="card-body">
+        <h4 className="card-title fw-bold text-muted mb-4">
+          📈 Nutritional Timeline (per 100g)
+        </h4>
 
-  return <Line data={data} options={options} />;
+        {loading ? (
+          <div className="text-center">
+            <div className="spinner-border text-primary" role="status"></div>
+          </div>
+        ) : !data || !data.labels?.length ? (
+          <p className="text-danger">
+            No valid products found for this category.
+          </p>
+        ) : (
+          <div style={{ minHeight: "400px" }}>
+            <Line data={data} options={options} />
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default LineChart;

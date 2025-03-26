@@ -1,5 +1,6 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
+import "../components/BarChart.css";
 import {
   Chart as ChartJS,
   BarElement,
@@ -44,7 +45,18 @@ const BarChart = ({ product }) => {
     },
   };
 
-  return <Bar data={data} options={options} />;
+  return (
+    <div className="card mt-4 shadow-sm">
+      <div className="card-body">
+        <h4 className="card-title fw-bold text-muted mb-4">
+          🍫 Nutrition Breakdown
+        </h4>
+        <div style={{ minHeight: "300px" }}>
+          <Bar data={data} options={options} />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default BarChart;

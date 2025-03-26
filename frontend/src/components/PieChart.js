@@ -24,7 +24,7 @@ const PieChart = ({ product }) => {
   };
 
   const options = {
-    animation: false, 
+    animation: false,
     responsive: true,
     plugins: {
       legend: {
@@ -33,7 +33,18 @@ const PieChart = ({ product }) => {
     },
   };
 
-  return <Pie data={data} options={options} />;
+  return (
+    <div className="card mt-4 shadow-sm">
+      <div className="card-body">
+        <h4 className="card-title fw-bold text-muted mb-4">
+          🥧 Macronutrient Distribution
+        </h4>
+        <div style={{ minHeight: "300px" }}>
+          <Pie data={data} options={options} />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default PieChart;

@@ -1,5 +1,6 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
+import "../components/BarChartCompare.css";
 import {
   Chart as ChartJS,
   BarElement,
@@ -55,7 +56,18 @@ const BarChartCompare = ({ product1, product2 }) => {
     },
   };
 
-  return <Bar data={data} options={options} />;
+  return (
+    <div className="card mt-4 shadow-sm">
+      <div className="card-body">
+        <h4 className="card-title fw-bold text-muted mb-4">
+          📊 Nutritional Values (Comparison)
+        </h4>
+        <div style={{ minHeight: "300px" }}>
+          <Bar data={data} options={options} />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default BarChartCompare;

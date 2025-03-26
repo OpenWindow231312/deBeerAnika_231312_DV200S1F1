@@ -47,11 +47,25 @@ const RadarChartSingle = ({ product }) => {
       r: {
         suggestedMin: 0,
         suggestedMax: 10,
+        ticks: {
+          stepSize: 1,
+        },
       },
     },
   };
 
-  return <Radar data={data} options={options} />;
+  return (
+    <div className="card mt-4 shadow-sm">
+      <div className="card-body">
+        <h4 className="card-title fw-bold text-muted mb-4">
+          🧭 Additive & Nutrition Profile
+        </h4>
+        <div style={{ minHeight: "300px" }}>
+          <Radar data={data} options={options} />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default RadarChartSingle;

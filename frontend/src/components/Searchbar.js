@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../components/Searchbar.css";
 
 const SearchBar = ({ onSelect }) => {
   const [query, setQuery] = useState("");
@@ -17,21 +18,33 @@ const SearchBar = ({ onSelect }) => {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search for a food item..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
+    <div className="searchbar-container">
+      <div className="input-group mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Search for a food item..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button className="btn btn-primary" onClick={handleSearch}>
+          Search
+        </button>
+      </div>
 
       {results.length > 0 && (
-        <ul>
+        <ul className="list-group">
           {results.map((product) => (
-            <li key={product.code}>
-              <button onClick={() => onSelect(product)}>
-                {product.product_name || "Unnamed Product"}
+            <li
+              key={product.code}
+              className="list-group-item d-flex justify-content-between align-items-center"
+            >
+              <span>{product.product_name || "Unnamed Product"}</span>
+              <button
+                className="btn btn-sm btn-outline-success"
+                onClick={() => onSelect(product)}
+              >
+                Select
               </button>
             </li>
           ))}
