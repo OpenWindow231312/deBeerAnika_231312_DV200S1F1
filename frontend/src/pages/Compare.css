@@ -76,3 +76,32 @@
     max-width: 400px;
     text-align: center;
 }
+
+.chart-section {
+    margin-top: 3rem;
+}
+
+.chart-section.full-width {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.chart-section.pie-charts {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.chart-section.pie-charts>div {
+    flex: 1;
+    max-width: 400px;
+    padding: 1rem;
+}
+
+.chart-section canvas {
+    width: 100% !important;
+    height: 300px !important;
+    max-height: 300px;
+}
