@@ -1,67 +1,34 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
+import SummaryCard from "../components/SummaryCard";
+import BarChart from "../components/BarChart";
+import PieChart from "../components/PieChart";
+import RadarChart from "../components/RadarChart";
 
 const Home = () => {
-  const [product, setProduct] = useState(null);
-
-  const fetchRandomProduct = async () => {
-    try {
-      const response = await axios.get(
-        "https://world.openfoodfacts.org/cgi/search.pl",
-        {
-          params: {
-            search_terms: "", // leave empty to get a variety
-            search_simple: 1,
-            action: "process",
-            json: 1,
-            page_size: 1,
-            page: Math.floor(Math.random() * 100), // random page
-          },
-        }
-      );
-
-      const randomProduct = response.data.products[0];
-
-      if (
-        randomProduct &&
-        randomProduct.product_name &&
-        randomProduct.nutriments?.["energy-kcal_100g"]
-      ) {
-        setProduct({
-          name: randomProduct.product_name,
-          calories: randomProduct.nutriments["energy-kcal_100g"],
-        });
-      } else {
-        setProduct({
-          name: "Unknown Product",
-          calories: "N/A",
-        });
-      }
-    } catch (error) {
-      console.error("❌ Failed to fetch product:", error.message);
-      setProduct({
-        name: "Error fetching product",
-        calories: "N/A",
-      });
-    }
-  };
-
   return (
     <div style={{ padding: "2rem" }}>
-      <h1>🍽️ Food Product Tester</h1>
-      <button
-        onClick={fetchRandomProduct}
-        style={{ padding: "1rem", fontSize: "1rem" }}
-      >
-        Get Random Product
-      </button>
+      <h1>🍽️ Food Dashboard</h1>
 
-      {product && (
-        <div style={{ marginTop: "2rem" }}>
-          <h2>🛒 {product.name}</h2>
-          <p>🔥 Calories per 100g: {product.calories}</p>
+      {/* Summary Cards */}
+      <div style={{ display: "flex", gap: "1rem", marginBottom: "2rem" }}>
+        <SummaryCard title="Popular Product" value="Coca-Cola" />
+        <SummaryCard title="Avg Sugar (Snacks)" value="12g" />
+        <SummaryCard title="Top Category" value="Snacks" />
+      </div>
+
+      {/* Charts */}
+      <div style={{ display: "flex", gap: "2rem" }}>
+        <div style={{ flex: 1 }}>
+          <BarChart />
         </div>
-      )}
+        <div style={{ flex: 1 }}>
+          <PieChart />
+        </div>
+      </div>
+
+      <div style={{ marginTop: "3rem" }}>
+        <RadarChart />
+      </div>
     </div>
   );
 };
