@@ -1,0 +1,78 @@
+.compare-page {
+    padding: 2rem;
+}
+
+.search-section {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.compare-columns {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.product-col {
+    flex: 1;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #f9f9f9;
+}
+
+.product-image {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.image-wrapper {
+    position: relative;
+}
+
+.sticker {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #ff6384;
+    color: white;
+    padding: 5px 10px;
+    font-weight: bold;
+    border-radius: 20px;
+}
+
+.chart-section {
+    margin-top: 3rem;
+}
+
+.chart-section.pie-charts {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.chart-section.full-width {
+    width: 100%;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 400px;
+    text-align: center;
+}
