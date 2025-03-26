@@ -1,53 +1,74 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Radar } from "react-chartjs-2";
 
-const RadarChart = () => {
-  const [chartData, setChartData] = useState(null);
+const RadarChart = ({ product1, product2 }) => {
+  const convertNutriScore = (grade) => {
+    const map = { a: 1, b: 2, c: 3, d: 4, e: 5 };
+    return map[grade?.toLowerCase()] || 0;
+  };
 
-  useEffect(() => {
-    const fetchRandomProduct = async () => {
-      try {
-        const url = `https://corsproxy.io/?https://world.openfoodfacts.org/cgi/search.pl?search_terms=coca+cola&search_simple=1&action=process&json=1&page_size=1`;
-        const res = await fetch(url);
-        const data = await res.json();
+  const getScoreData = (product) => {
+    if (!product) return [0, 0, 0, 0];
 
-        const product = data.products?.[0];
-        if (!product || !product.nutriments) return;
+    const additives = product.additives_tags?.length || 0;
+    const nova = product.nova_group || 0;
+    const nutri = convertNutriScore(product.nutriscore_grade);
+    const ingredients = product.ingredients_text?.split(",").length || 0;
 
-        const n = product.nutriments;
+    return [additives, nova, nutri, ingredients];
+  };
 
-        setChartData({
-          labels: ["Sugar", "Fat", "Salt", "Protein", "Calories"],
-          datasets: [
-            {
-              label: product.product_name || "Unknown Product",
-              data: [
-                n.sugars_100g || 0,
-                n.fat_100g || 0,
-                n.salt_100g || 0,
-                n.proteins_100g || 0,
-                n["energy-kcal_100g"] || 0,
-              ],
-              backgroundColor: "rgba(162, 34, 34, 0.2)",
-              borderColor: "#a22",
-              borderWidth: 2,
-            },
-          ],
-        });
-      } catch (err) {
-        console.error("Radar fetch failed:", err.message);
-      }
-    };
+  const labels = [
+    "Additives Count",
+    "NOVA Group (1–4)",
+    "NutriScore (1–5)",
+    "Ingredients Count",
+  ];
 
-    fetchRandomProduct();
-  }, []);
-
-  if (!chartData) return <p>Loading Radar Chart...</p>;
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: product1?.product_name || "Product 1",
+        data: getScoreData(product1),
+        backgroundColor: "rgba(54, 162, 235, 0.2)",
+        borderColor: "#36a2eb",
+        borderWidth: 2,
+      },
+      {
+        label: product2?.product_name || "Product 2",
+        data: getScoreData(product2),
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderColor: "#ff6384",
+        borderWidth: 2,
+      },
+    ],
+  };
 
   return (
     <div>
-      <h3>Nutrition Profile</h3>
-      <Radar data={chartData} />
+      <h3>🧪 Additive Awareness</h3>
+      <p style={{ fontSize: "0.9rem", marginBottom: "1rem" }}>
+        This radar chart shows how processed each product is:
+        <ul>
+          <li>
+            <strong>Additives Count:</strong> Number of additives like
+            preservatives, colorants, etc.
+          </li>
+          <li>
+            <strong>NOVA Group:</strong> 1 = unprocessed, 4 = ultra-processed.
+          </li>
+          <li>
+            <strong>NutriScore:</strong> 1 (A) = healthiest, 5 (E) = least
+            healthy.
+          </li>
+          <li>
+            <strong>Ingredient Count:</strong> More ingredients = more complex
+            processing.
+          </li>
+        </ul>
+      </p>
+      <Radar data={data} />
     </div>
   );
 };

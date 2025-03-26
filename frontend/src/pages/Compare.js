@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import SearchBar from "../components/Searchbar";
-import { Bar, Radar, Pie } from "react-chartjs-2";
-import "./Compare.css"; 
+import { Bar, Pie } from "react-chartjs-2";
+import RadarChart from "../components/RadarChart";
+import "./Compare.css";
 
 const Compare = () => {
   const [product1, setProduct1] = useState(null);
@@ -37,6 +38,28 @@ const Compare = () => {
     };
   };
 
+  const getHealthLabel = (p) => {
+    const nova = p?.nova_group || 0;
+    const nutri = p?.nutriscore_grade?.toLowerCase();
+
+    const healthScore =
+      5 -
+      nova +
+      (nutri === "a"
+        ? 5
+        : nutri === "b"
+        ? 4
+        : nutri === "c"
+        ? 3
+        : nutri === "d"
+        ? 2
+        : 1);
+
+    if (healthScore >= 8) return "🟢 Healthy";
+    if (healthScore >= 6) return "🟡 Moderate";
+    return "🔴 Ultra Processed";
+  };
+
   const labels = ["Sugar", "Fat", "Salt", "Protein", "Calories"];
   const nutrition1 = getNutrition(product1);
   const nutrition2 = getNutrition(product2);
@@ -53,26 +76,6 @@ const Compare = () => {
         label: product2?.product_name || "Product 2",
         data: nutrition2,
         backgroundColor: "#ff6384",
-      },
-    ],
-  };
-
-  const radarData = {
-    labels,
-    datasets: [
-      {
-        label: product1?.product_name || "Product 1",
-        data: nutrition1,
-        backgroundColor: "rgba(54, 162, 235, 0.2)",
-        borderColor: "blue",
-        borderWidth: 2,
-      },
-      {
-        label: product2?.product_name || "Product 2",
-        data: nutrition2,
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        borderColor: "red",
-        borderWidth: 2,
       },
     ],
   };
@@ -112,6 +115,8 @@ const Compare = () => {
                     </span>
                   )}
                 </div>
+
+                <p className="health-meter">{getHealthLabel(product)}</p>
 
                 <button
                   onClick={() =>
@@ -165,8 +170,7 @@ const Compare = () => {
           </div>
 
           <div className="chart-section full-width">
-            <h3>🧭 Nutrition Profile Comparison</h3>
-            <Radar data={radarData} />
+            <RadarChart product1={product1} product2={product2} />
           </div>
         </>
       )}

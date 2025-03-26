@@ -105,3 +105,9 @@
     height: 300px !important;
     max-height: 300px;
 }
+
+.health-meter {
+    margin: 1rem 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
