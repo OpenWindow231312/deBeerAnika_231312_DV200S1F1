@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import SearchBar from "../components/Searchbar";
-import { Radar, Bar } from "react-chartjs-2";
+import { Bar, Radar, Pie } from "react-chartjs-2";
+import "./Compare.css"; 
 
 const Compare = () => {
   const [product1, setProduct1] = useState(null);
   const [product2, setProduct2] = useState(null);
+  const [showIngredients1, setShowIngredients1] = useState(false);
+  const [showIngredients2, setShowIngredients2] = useState(false);
 
   const getNutrition = (p) => {
     if (!p?.nutriments) return [0, 0, 0, 0, 0];
@@ -17,9 +20,42 @@ const Compare = () => {
     ];
   };
 
+  const getPieData = (p) => {
+    const n = p?.nutriments || {};
+    return {
+      labels: ["Carbohydrates", "Fat", "Protein"],
+      datasets: [
+        {
+          data: [
+            n.carbohydrates_100g || 0,
+            n.fat_100g || 0,
+            n.proteins_100g || 0,
+          ],
+          backgroundColor: ["#ffcd56", "#ff6384", "#36a2eb"],
+        },
+      ],
+    };
+  };
+
   const labels = ["Sugar", "Fat", "Salt", "Protein", "Calories"];
   const nutrition1 = getNutrition(product1);
   const nutrition2 = getNutrition(product2);
+
+  const barData = {
+    labels,
+    datasets: [
+      {
+        label: product1?.product_name || "Product 1",
+        data: nutrition1,
+        backgroundColor: "#36a2eb",
+      },
+      {
+        label: product2?.product_name || "Product 2",
+        data: nutrition2,
+        backgroundColor: "#ff6384",
+      },
+    ],
+  };
 
   const radarData = {
     labels,
@@ -41,47 +77,96 @@ const Compare = () => {
     ],
   };
 
-  const barData = {
-    labels,
-    datasets: [
-      {
-        label: product1?.product_name || "Product 1",
-        data: nutrition1,
-        backgroundColor: "#36a2eb",
-      },
-      {
-        label: product2?.product_name || "Product 2",
-        data: nutrition2,
-        backgroundColor: "#ff6384",
-      },
-    ],
-  };
-
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Compare Products</h1>
+    <div className="compare-page">
+      <h1>🍽️ Compare Two Products</h1>
 
-      <div style={{ display: "flex", gap: "2rem", marginBottom: "2rem" }}>
-        <div>
-          <h3>Product 1</h3>
-          <SearchBar onSelect={setProduct1} />
-        </div>
-        <div>
-          <h3>Product 2</h3>
-          <SearchBar onSelect={setProduct2} />
-        </div>
+      <div className="search-section">
+        <SearchBar onSelect={setProduct1} />
+        <SearchBar onSelect={setProduct2} />
       </div>
 
       {product1 && product2 && (
         <>
-          <div style={{ margin: "2rem 0" }}>
-            <h3>Radar Chart</h3>
-            <Radar data={radarData} />
+          <div className="compare-columns">
+            {[product1, product2].map((product, i) => (
+              <div key={i} className="product-col">
+                <h2>{product.product_name || "Unnamed Product"}</h2>
+                <p>
+                  <strong>Category:</strong>{" "}
+                  {product.categories_tags?.[0]?.replace("en:", "") || "N/A"}
+                </p>
+                <p>
+                  <strong>Quantity:</strong> {product.quantity || "N/A"}
+                </p>
+
+                <div className="image-wrapper">
+                  <img
+                    src={product.image_front_url}
+                    alt="product"
+                    className="product-image"
+                  />
+                  {product.labels_tags?.length > 0 && (
+                    <span className="sticker">
+                      {product.labels_tags[0].replace("en:", "").toUpperCase()}
+                    </span>
+                  )}
+                </div>
+
+                <button
+                  onClick={() =>
+                    i === 0
+                      ? setShowIngredients1(true)
+                      : setShowIngredients2(true)
+                  }
+                >
+                  Ingredients
+                </button>
+
+                {(i === 0 && showIngredients1) ||
+                (i === 1 && showIngredients2) ? (
+                  <div className="modal">
+                    <div className="modal-content">
+                      <h3>Ingredients</h3>
+                      <p>
+                        {product.ingredients_text ||
+                          "No ingredients info available."}
+                      </p>
+                      <button
+                        onClick={() =>
+                          i === 0
+                            ? setShowIngredients1(false)
+                            : setShowIngredients2(false)
+                        }
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            ))}
           </div>
 
-          <div style={{ margin: "2rem 0" }}>
-            <h3>Bar Chart</h3>
+          <div className="chart-section full-width">
+            <h3>📊 Nutritional Values (per 100g)</h3>
             <Bar data={barData} />
+          </div>
+
+          <div className="chart-section pie-charts">
+            <div>
+              <h4>{product1.product_name}</h4>
+              <Pie data={getPieData(product1)} />
+            </div>
+            <div>
+              <h4>{product2.product_name}</h4>
+              <Pie data={getPieData(product2)} />
+            </div>
+          </div>
+
+          <div className="chart-section full-width">
+            <h3>🧭 Nutrition Profile Comparison</h3>
+            <Radar data={radarData} />
           </div>
         </>
       )}
