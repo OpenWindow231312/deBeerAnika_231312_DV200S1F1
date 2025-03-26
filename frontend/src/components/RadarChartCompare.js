@@ -23,15 +23,14 @@ const RadarChartCompare = ({ product1, product2 }) => {
   if (!product1?.nutriments || !product2?.nutriments) return null;
 
   const getValues = (p) => [
-    p.nutriments.sugars_100g || 0,
-    p.nutriments.fat_100g || 0,
+    p.nova_group || 0,
+    p.additives_n || 0,
+    p.nutriments["saturated-fat_100g"] || 0,
     p.nutriments.salt_100g || 0,
-    p.nutriments.proteins_100g || 0,
-    p.nutriments["energy-kcal_100g"] || 0,
   ];
 
   const data = {
-    labels: ["Sugar", "Fat", "Salt", "Protein", "Calories"],
+    labels: ["Nova Score", "Additives", "Saturated Fat", "Salt"],
     datasets: [
       {
         label: product1.product_name,
@@ -56,7 +55,10 @@ const RadarChartCompare = ({ product1, product2 }) => {
     scales: {
       r: {
         suggestedMin: 0,
-        suggestedMax: 100,
+        suggestedMax: 10,
+        ticks: {
+          stepSize: 1,
+        },
       },
     },
   };

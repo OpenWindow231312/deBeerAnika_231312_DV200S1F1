@@ -1,67 +1,50 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Bar } from "react-chartjs-2";
-import axios from "axios";
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
-const categories = [
-  "snacks",
-  "beverages",
-  "breakfasts",
-  "desserts",
-  "biscuits",
-];
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-const BarChart = () => {
-  const [chartData, setChartData] = useState(null);
+const BarChart = ({ product }) => {
+  if (!product?.nutriments) return null;
 
-  useEffect(() => {
-    const fetchCategoryData = async () => {
-      const sugarAverages = [];
+  const { nutriments } = product;
 
-      for (const category of categories) {
-        try {
-          const url = `https://corsproxy.io/?https://world.openfoodfacts.org/category/${category}.json`;
-          const res = await axios.get(url);
-
-          const products = res.data.products?.slice(0, 50) || [];
-
-          const totalSugar = products.reduce((sum, p) => {
-            const sugar = p.nutriments?.sugars_100g || 0;
-            return sum + sugar;
-          }, 0);
-
-          const avgSugar = products.length
-            ? (totalSugar / products.length).toFixed(1)
-            : 0;
-          sugarAverages.push(avgSugar);
-        } catch (err) {
-          console.error(`Failed to fetch category ${category}:`, err.message);
-          sugarAverages.push(0);
-        }
-      }
-
-      setChartData({
-        labels: categories.map((c) => c.charAt(0).toUpperCase() + c.slice(1)),
-        datasets: [
-          {
-            label: "Avg Sugar (per 100g)",
-            data: sugarAverages,
-            backgroundColor: "#a22",
-          },
+  const data = {
+    labels: ["Sugar", "Fat", "Salt", "Protein", "Calories"],
+    datasets: [
+      {
+        label: product.product_name,
+        data: [
+          nutriments.sugars_100g || 0,
+          nutriments.fat_100g || 0,
+          nutriments.salt_100g || 0,
+          nutriments.proteins_100g || 0,
+          nutriments["energy-kcal_100g"] || 0,
         ],
-      });
-    };
+        backgroundColor: "#a22",
+      },
+    ],
+  };
 
-    fetchCategoryData();
-  }, []);
+  const options = {
+    animation: false,
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+    },
+    scales: {
+      y: { beginAtZero: true },
+    },
+  };
 
-  if (!chartData) return <p>Loading Bar Chart...</p>;
-
-  return (
-    <div>
-      <h3>Average Sugar per Category</h3>
-      <Bar data={chartData} />
-    </div>
-  );
+  return <Bar data={data} options={options} />;
 };
 
 export default BarChart;
