@@ -49,4 +49,10 @@ const PieChart = () => {
   );
 };
 
+const options = {
+  animation: false,
+  responsive: true,
+  plugins: { legend: { position: "bottom" } },
+};
+
 export default PieChart;

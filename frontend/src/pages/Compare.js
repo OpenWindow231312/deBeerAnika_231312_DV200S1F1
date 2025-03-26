@@ -5,24 +5,15 @@ import "./Compare.css";
 
 const BarChart = lazy(() => import("../components/BarChart"));
 const PieChart = lazy(() => import("../components/PieChart"));
-const RadarChartCompare = lazy(() => import("../components/RadarChartCompare"));
+const NutritionRadarChart = lazy(() =>
+  import("../components/NutritionRadarChart")
+);
 
 const Compare = () => {
   const [product1, setProduct1] = useState(null);
   const [product2, setProduct2] = useState(null);
   const [showIngredients1, setShowIngredients1] = useState(false);
   const [showIngredients2, setShowIngredients2] = useState(false);
-
-  const getNutrition = (p) => {
-    if (!p?.nutriments) return [0, 0, 0, 0, 0];
-    return [
-      p.nutriments.sugars_100g || 0,
-      p.nutriments.fat_100g || 0,
-      p.nutriments.salt_100g || 0,
-      p.nutriments.proteins_100g || 0,
-      p.nutriments["energy-kcal_100g"] || 0,
-    ];
-  };
 
   const getPieData = (p) => {
     const n = p?.nutriments || {};
@@ -43,7 +34,7 @@ const Compare = () => {
 
   return (
     <div className="compare-container container">
-      <h1 className="compare-title">🍽️ Compare Products</h1>
+      <h1 className="compare-title">🍽️ Compare Two Products</h1>
 
       <div className="row mb-4">
         <div className="col-md-6">
@@ -56,7 +47,7 @@ const Compare = () => {
 
       {product1 && product2 && (
         <>
-          {/* Two Columns */}
+          {/* Product Info Columns */}
           <div className="compare-columns">
             {[product1, product2].map((product, i) => (
               <div key={i} className="compare-column">
@@ -117,7 +108,7 @@ const Compare = () => {
             ))}
           </div>
 
-          {/* Charts */}
+          {/* Charts Section */}
           <Suspense fallback={<SkeletonLoader />}>
             <div className="chart-wrapper">
               <h5>📊 Nutritional Values</h5>
@@ -127,17 +118,17 @@ const Compare = () => {
             <div className="pie-chart-row">
               <div className="pie-chart-col">
                 <h6 className="text-center">{product1.product_name}</h6>
-                <PieChart product={product1} />
+                <PieChart product={product1} disableAnimation />
               </div>
               <div className="pie-chart-col">
                 <h6 className="text-center">{product2.product_name}</h6>
-                <PieChart product={product2} />
+                <PieChart product={product2} disableAnimation />
               </div>
             </div>
 
             <div className="chart-wrapper mt-4">
               <h5>🧭 Additive & Nutrition Profile</h5>
-              <RadarChartCompare product1={product1} product2={product2} />
+              <NutritionRadarChart product1={product1} product2={product2} />
             </div>
           </Suspense>
         </>
