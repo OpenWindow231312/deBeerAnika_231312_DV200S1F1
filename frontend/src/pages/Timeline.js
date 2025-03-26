@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Line } from "react-chartjs-2";
+import LineChart from "../components/LineChart";
 import "./Timeline.css";
 
 const categoryProducts = {
@@ -69,6 +69,7 @@ const Timeline = () => {
 
   const fetchProductsByName = async () => {
     const names = categoryProducts[selectedCategory];
+
     const promises = names.map((name) => {
       const url = `https://corsproxy.io/?https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(
         name
@@ -92,7 +93,7 @@ const Timeline = () => {
             p.nutriments &&
             p.nutriments["energy-kcal_100g"]
         )
-        .slice(0, 5);
+        .slice(0, 5); // Limit to 5 for performance
 
       setProducts(validProducts);
     } catch (err) {
@@ -113,7 +114,9 @@ const Timeline = () => {
       label: nutrientOptions[key].label,
       data: products.map((p) => p.nutriments?.[nutrientOptions[key].key] || 0),
       borderColor: nutrientOptions[key].color,
+      backgroundColor: nutrientOptions[key].color,
       fill: false,
+      tension: 0.3,
     })),
   };
 
@@ -156,13 +159,7 @@ const Timeline = () => {
       </div>
 
       <div className="chart-section">
-        {loading ? (
-          <div className="spinner"></div>
-        ) : products.length > 0 ? (
-          <Line data={chartData} />
-        ) : (
-          <p>No valid products found for this category.</p>
-        )}
+        <LineChart data={chartData} loading={loading} />
       </div>
     </div>
   );
