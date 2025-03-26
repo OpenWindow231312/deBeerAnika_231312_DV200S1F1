@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import SearchBar from "../components/Searchbar";
-import { Bar, Pie } from "react-chartjs-2";
-import RadarChart from "../components/RadarChart";
+import SkeletonLoader from "../components/SkeletonLoader";
 import "./Compare.css";
+
+const BarChart = lazy(() => import("../components/BarChart"));
+const PieChart = lazy(() => import("../components/PieChart"));
+const RadarChartCompare = lazy(() => import("../components/RadarChartCompare"));
 
 const Compare = () => {
   const [product1, setProduct1] = useState(null);
@@ -38,47 +41,6 @@ const Compare = () => {
     };
   };
 
-  const getHealthLabel = (p) => {
-    const nova = p?.nova_group || 0;
-    const nutri = p?.nutriscore_grade?.toLowerCase();
-    const healthScore =
-      5 -
-      nova +
-      (nutri === "a"
-        ? 5
-        : nutri === "b"
-        ? 4
-        : nutri === "c"
-        ? 3
-        : nutri === "d"
-        ? 2
-        : 1);
-
-    if (healthScore >= 8) return "🟢 Healthy";
-    if (healthScore >= 6) return "🟡 Moderate";
-    return "🔴 Ultra Processed";
-  };
-
-  const labels = ["Sugar", "Fat", "Salt", "Protein", "Calories"];
-  const nutrition1 = getNutrition(product1);
-  const nutrition2 = getNutrition(product2);
-
-  const barData = {
-    labels,
-    datasets: [
-      {
-        label: product1?.product_name || "Product 1",
-        data: nutrition1,
-        backgroundColor: "#36a2eb",
-      },
-      {
-        label: product2?.product_name || "Product 2",
-        data: nutrition2,
-        backgroundColor: "#ff6384",
-      },
-    ],
-  };
-
   return (
     <div className="compare-container container">
       <h1 className="compare-title">🍽️ Compare Products</h1>
@@ -94,16 +56,15 @@ const Compare = () => {
 
       {product1 && product2 && (
         <>
+          {/* Two Columns */}
           <div className="compare-columns">
             {[product1, product2].map((product, i) => (
               <div key={i} className="compare-column">
-                <div className="product-details">
-                  <div className="product-name">{product.product_name}</div>
-                  <div className="product-meta">
-                    {product.categories_tags?.[0]?.replace("en:", "") || "N/A"}{" "}
-                    — {product.quantity || "N/A"}
-                  </div>
-                </div>
+                <h5>{product.product_name}</h5>
+                <p className="text-muted">
+                  {product.categories_tags?.[0]?.replace("en:", "") || "N/A"} —{" "}
+                  {product.quantity || "N/A"}
+                </p>
 
                 <div className="product-image-wrapper">
                   <img src={product.image_front_url} alt="product" />
@@ -113,8 +74,6 @@ const Compare = () => {
                     </div>
                   )}
                 </div>
-
-                <p className="health-meter">{getHealthLabel(product)}</p>
 
                 <button
                   className="btn btn-outline-primary ingredient-button"
@@ -150,19 +109,6 @@ const Compare = () => {
                               "No ingredients listed."}
                           </p>
                         </div>
-                        <div className="modal-footer">
-                          <button
-                            type="button"
-                            className="btn btn-secondary"
-                            onClick={() =>
-                              i === 0
-                                ? setShowIngredients1(false)
-                                : setShowIngredients2(false)
-                            }
-                          >
-                            Close
-                          </button>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -171,25 +117,29 @@ const Compare = () => {
             ))}
           </div>
 
-          <div className="chart-wrapper">
-            <h5 className="mb-3">📊 Nutritional Values</h5>
-            <Bar data={barData} />
-          </div>
-
-          <div className="pie-chart-row">
-            <div className="pie-chart-col">
-              <h6 className="text-center">{product1.product_name}</h6>
-              <Pie data={getPieData(product1)} />
+          {/* Charts */}
+          <Suspense fallback={<SkeletonLoader />}>
+            <div className="chart-wrapper">
+              <h5>📊 Nutritional Values</h5>
+              <BarChart product1={product1} product2={product2} />
             </div>
-            <div className="pie-chart-col">
-              <h6 className="text-center">{product2.product_name}</h6>
-              <Pie data={getPieData(product2)} />
-            </div>
-          </div>
 
-          <div className="chart-wrapper health-meter">
-            <RadarChart product1={product1} product2={product2} />
-          </div>
+            <div className="pie-chart-row">
+              <div className="pie-chart-col">
+                <h6 className="text-center">{product1.product_name}</h6>
+                <PieChart product={product1} />
+              </div>
+              <div className="pie-chart-col">
+                <h6 className="text-center">{product2.product_name}</h6>
+                <PieChart product={product2} />
+              </div>
+            </div>
+
+            <div className="chart-wrapper mt-4">
+              <h5>🧭 Additive & Nutrition Profile</h5>
+              <RadarChartCompare product1={product1} product2={product2} />
+            </div>
+          </Suspense>
         </>
       )}
     </div>

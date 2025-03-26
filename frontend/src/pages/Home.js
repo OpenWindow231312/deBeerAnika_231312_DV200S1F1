@@ -1,12 +1,12 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
-import axios from "axios";
-import SearchBar from "../components/Searchbar";
-import SummaryCard from "../components/SummaryCard";
-import "./Home.css";
+import React, { useEffect, useState, lazy, Suspense } from 'react';
+import axios from 'axios';
+import SearchBar from '../components/Searchbar';
+import SummaryCard from '../components/SummaryCard';
+import './Home.css';
 
-const BarChart = lazy(() => import("../components/BarChart"));
-const PieChart = lazy(() => import("../components/PieChart"));
-const RadarChartSingle = lazy(() => import("../components/RadarChartSingle"));
+const BarChart = lazy(() => import('../components/BarChart'));
+const PieChart = lazy(() => import('../components/PieChart'));
+const RadarChartSingle = lazy(() => import('../components/RadarChartSingle'));
 
 const Home = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -19,7 +19,7 @@ const Home = () => {
       const res = await axios.get(url);
       setSelectedProduct(res.data.products?.[0] || null);
     } catch (err) {
-      console.error("Default fetch failed:", err.message);
+      console.error('Default fetch failed:', err.message);
     } finally {
       setLoading(false);
     }
@@ -45,14 +45,8 @@ const Home = () => {
         <>
           <div className="card-wrapper summary-card-row mb-4">
             <SummaryCard title="Product" value={selectedProduct.product_name} />
-            <SummaryCard
-              title="Calories"
-              value={`${nutriments["energy-kcal_100g"] || 0} kcal`}
-            />
-            <SummaryCard
-              title="Sugar"
-              value={`${nutriments.sugars_100g || 0} g`}
-            />
+            <SummaryCard title="Calories" value={`${nutriments['energy-kcal_100g'] || 0} kcal`} />
+            <SummaryCard title="Sugar" value={`${nutriments.sugars_100g || 0} g`} />
           </div>
 
           <Suspense fallback={<div className="spinner"></div>}>
