@@ -1,85 +1,89 @@
 import React, { useState } from "react";
 import SearchBar from "../components/Searchbar";
-import { Radar } from "react-chartjs-2";
-import axios from "axios";
+import { Radar, Bar } from "react-chartjs-2";
 
 const Compare = () => {
-  const [food1, setFood1] = useState(null);
-  const [food2, setFood2] = useState(null);
-  const [data1, setData1] = useState(null);
-  const [data2, setData2] = useState(null);
+  const [product1, setProduct1] = useState(null);
+  const [product2, setProduct2] = useState(null);
 
-  const apiKey = process.env.REACT_APP_CHOMP_API_KEY;
+  const getNutrition = (p) => {
+    if (!p?.nutriments) return [0, 0, 0, 0, 0];
+    return [
+      p.nutriments.sugars_100g || 0,
+      p.nutriments.fat_100g || 0,
+      p.nutriments.salt_100g || 0,
+      p.nutriments.proteins_100g || 0,
+      p.nutriments["energy-kcal_100g"] || 0,
+    ];
+  };
 
-  const fetchDetails = async (id, setFunc) => {
-    const res = await axios.get(
-      "https://chompthis.com/api/v2/food/branded.php",
+  const labels = ["Sugar", "Fat", "Salt", "Protein", "Calories"];
+  const nutrition1 = getNutrition(product1);
+  const nutrition2 = getNutrition(product2);
+
+  const radarData = {
+    labels,
+    datasets: [
       {
-        params: { id, api_key: apiKey },
-      }
-    );
-    setFunc(res.data);
+        label: product1?.product_name || "Product 1",
+        data: nutrition1,
+        backgroundColor: "rgba(54, 162, 235, 0.2)",
+        borderColor: "blue",
+        borderWidth: 2,
+      },
+      {
+        label: product2?.product_name || "Product 2",
+        data: nutrition2,
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderColor: "red",
+        borderWidth: 2,
+      },
+    ],
   };
 
-  const handleSelectFood1 = (item) => {
-    setFood1(item);
-    fetchDetails(item.id, setData1);
-  };
-
-  const handleSelectFood2 = (item) => {
-    setFood2(item);
-    fetchDetails(item.id, setData2);
-  };
-
-  const buildChartData = () => {
-    if (!data1 || !data2) return null;
-
-    return {
-      labels: ["Calories", "Sugar", "Fat", "Protein", "Carbs"],
-      datasets: [
-        {
-          label: food1.name,
-          data: [
-            data1.calories,
-            data1.sugar,
-            data1.total_fat,
-            data1.protein,
-            data1.carbohydrates,
-          ],
-        },
-        {
-          label: food2.name,
-          data: [
-            data2.calories,
-            data2.sugar,
-            data2.total_fat,
-            data2.protein,
-            data2.carbohydrates,
-          ],
-        },
-      ],
-    };
+  const barData = {
+    labels,
+    datasets: [
+      {
+        label: product1?.product_name || "Product 1",
+        data: nutrition1,
+        backgroundColor: "#36a2eb",
+      },
+      {
+        label: product2?.product_name || "Product 2",
+        data: nutrition2,
+        backgroundColor: "#ff6384",
+      },
+    ],
   };
 
   return (
-    <div>
-      <h1>Compare Foods</h1>
+    <div style={{ padding: "2rem" }}>
+      <h1>Compare Products</h1>
 
-      <div style={{ display: "flex", gap: "2rem" }}>
+      <div style={{ display: "flex", gap: "2rem", marginBottom: "2rem" }}>
         <div>
-          <h3>Search for Food 1</h3>
-          <SearchBar onSelectFood={handleSelectFood1} />
+          <h3>Product 1</h3>
+          <SearchBar onSelect={setProduct1} />
         </div>
         <div>
-          <h3>Search for Food 2</h3>
-          <SearchBar onSelectFood={handleSelectFood2} />
+          <h3>Product 2</h3>
+          <SearchBar onSelect={setProduct2} />
         </div>
       </div>
 
-      {data1 && data2 && (
-        <div style={{ width: "600px", margin: "2rem auto" }}>
-          <Radar data={buildChartData()} />
-        </div>
+      {product1 && product2 && (
+        <>
+          <div style={{ margin: "2rem 0" }}>
+            <h3>Radar Chart</h3>
+            <Radar data={radarData} />
+          </div>
+
+          <div style={{ margin: "2rem 0" }}>
+            <h3>Bar Chart</h3>
+            <Bar data={barData} />
+          </div>
+        </>
       )}
     </div>
   );
