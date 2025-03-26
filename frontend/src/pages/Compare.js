@@ -41,7 +41,6 @@ const Compare = () => {
   const getHealthLabel = (p) => {
     const nova = p?.nova_group || 0;
     const nutri = p?.nutriscore_grade?.toLowerCase();
-
     const healthScore =
       5 -
       nova +
@@ -81,71 +80,90 @@ const Compare = () => {
   };
 
   return (
-    <div className="compare-page">
-      <h1>🍽️ Compare Two Products</h1>
+    <div className="compare-container container">
+      <h1 className="compare-title">🍽️ Compare Products</h1>
 
-      <div className="search-section">
-        <SearchBar onSelect={setProduct1} />
-        <SearchBar onSelect={setProduct2} />
+      <div className="row mb-4">
+        <div className="col-md-6">
+          <SearchBar onSelect={setProduct1} />
+        </div>
+        <div className="col-md-6">
+          <SearchBar onSelect={setProduct2} />
+        </div>
       </div>
 
       {product1 && product2 && (
         <>
           <div className="compare-columns">
             {[product1, product2].map((product, i) => (
-              <div key={i} className="product-col">
-                <h2>{product.product_name || "Unnamed Product"}</h2>
-                <p>
-                  <strong>Category:</strong>{" "}
-                  {product.categories_tags?.[0]?.replace("en:", "") || "N/A"}
-                </p>
-                <p>
-                  <strong>Quantity:</strong> {product.quantity || "N/A"}
-                </p>
+              <div key={i} className="compare-column">
+                <div className="product-details">
+                  <div className="product-name">{product.product_name}</div>
+                  <div className="product-meta">
+                    {product.categories_tags?.[0]?.replace("en:", "") || "N/A"}{" "}
+                    — {product.quantity || "N/A"}
+                  </div>
+                </div>
 
-                <div className="image-wrapper">
-                  <img
-                    src={product.image_front_url}
-                    alt="product"
-                    className="product-image"
-                  />
-                  {product.labels_tags?.length > 0 && (
-                    <span className="sticker">
+                <div className="product-image-wrapper">
+                  <img src={product.image_front_url} alt="product" />
+                  {product.labels_tags?.[0] && (
+                    <div className="label-tag">
                       {product.labels_tags[0].replace("en:", "").toUpperCase()}
-                    </span>
+                    </div>
                   )}
                 </div>
 
                 <p className="health-meter">{getHealthLabel(product)}</p>
 
                 <button
+                  className="btn btn-outline-primary ingredient-button"
                   onClick={() =>
                     i === 0
                       ? setShowIngredients1(true)
                       : setShowIngredients2(true)
                   }
                 >
-                  Ingredients
+                  View Ingredients
                 </button>
 
                 {(i === 0 && showIngredients1) ||
                 (i === 1 && showIngredients2) ? (
-                  <div className="modal">
-                    <div className="modal-content">
-                      <h3>Ingredients</h3>
-                      <p>
-                        {product.ingredients_text ||
-                          "No ingredients info available."}
-                      </p>
-                      <button
-                        onClick={() =>
-                          i === 0
-                            ? setShowIngredients1(false)
-                            : setShowIngredients2(false)
-                        }
-                      >
-                        Close
-                      </button>
+                  <div className="modal show d-block" tabIndex="-1">
+                    <div className="modal-dialog">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5 className="modal-title">Ingredients</h5>
+                          <button
+                            type="button"
+                            className="btn-close"
+                            onClick={() =>
+                              i === 0
+                                ? setShowIngredients1(false)
+                                : setShowIngredients2(false)
+                            }
+                          ></button>
+                        </div>
+                        <div className="modal-body">
+                          <p>
+                            {product.ingredients_text ||
+                              "No ingredients listed."}
+                          </p>
+                        </div>
+                        <div className="modal-footer">
+                          <button
+                            type="button"
+                            className="btn btn-secondary"
+                            onClick={() =>
+                              i === 0
+                                ? setShowIngredients1(false)
+                                : setShowIngredients2(false)
+                            }
+                          >
+                            Close
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ) : null}
@@ -153,23 +171,23 @@ const Compare = () => {
             ))}
           </div>
 
-          <div className="chart-section full-width">
-            <h3>📊 Nutritional Values (per 100g)</h3>
+          <div className="chart-wrapper">
+            <h5 className="mb-3">📊 Nutritional Values</h5>
             <Bar data={barData} />
           </div>
 
-          <div className="chart-section pie-charts">
-            <div>
-              <h4>{product1.product_name}</h4>
+          <div className="pie-chart-row">
+            <div className="pie-chart-col">
+              <h6 className="text-center">{product1.product_name}</h6>
               <Pie data={getPieData(product1)} />
             </div>
-            <div>
-              <h4>{product2.product_name}</h4>
+            <div className="pie-chart-col">
+              <h6 className="text-center">{product2.product_name}</h6>
               <Pie data={getPieData(product2)} />
             </div>
           </div>
 
-          <div className="chart-section full-width">
+          <div className="chart-wrapper health-meter">
             <RadarChart product1={product1} product2={product2} />
           </div>
         </>

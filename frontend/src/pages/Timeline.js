@@ -96,7 +96,7 @@ const Timeline = () => {
 
       setProducts(validProducts);
     } catch (err) {
-      console.error("Parallel fetch failed:", err.message);
+      console.error("❌ Parallel fetch failed:", err.message);
       setProducts([]);
     } finally {
       setLoading(false);
