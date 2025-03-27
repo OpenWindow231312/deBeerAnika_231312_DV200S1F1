@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LineChart from "../components/LineChart";
-import Dropdown from "../components/Dropdown"; // Import the dropdown component
+import Dropdown from "../components/Dropdown"; 
+import WidgetHeader from "../components/WidgetHeader";
 import "../../src/index.css";
 import "./Timeline.css";
 
@@ -114,14 +115,37 @@ const Timeline = () => {
         fill: false,
         tension: 0.3,
       },
-      // Add more nutrients here if needed
+      {
+        label: "Sugar (g)",
+        data: products.map((p) => p.nutriments?.sugars_100g || 0),
+        borderColor: "#FFCD56",
+        backgroundColor: "rgba(255, 205, 86, 0.2)",
+        fill: false,
+        tension: 0.3,
+      },
+      {
+        label: "Salt (g)",
+        data: products.map((p) => p.nutriments?.salt_100g || 0),
+        borderColor: "#4BC0C0",
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        fill: false,
+        tension: 0.3,
+      },
+      {
+        label: "Protein (g)",
+        data: products.map((p) => p.nutriments?.proteins_100g || 0),
+        borderColor: "#9966FF",
+        backgroundColor: "rgba(153, 102, 255, 0.2)",
+        fill: false,
+        tension: 0.3,
+      },
     ],
   };
 
   return (
     <div className="timeline-page">
       <div className="timeline-container">
-        <h1>Nutritional Timeline</h1>
+        <WidgetHeader title="" />
 
         <div className="dropdown-wrapper">
           <label>Select a category: </label>
@@ -131,6 +155,12 @@ const Timeline = () => {
             onSelect={setSelectedCategory}
           />
         </div>
+
+        <p className="explanation-text">
+          We are all about the facts when it comes to food and
+          nutrition. Compare the nutritional values of different categories and
+          discover the real facts behind your favourite foods. Hover to view more details.
+        </p>
 
         <div className="chart-section">
           <LineChart data={chartData} loading={loading} />

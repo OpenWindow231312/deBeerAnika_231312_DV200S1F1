@@ -38,7 +38,7 @@ const Compare = () => {
 
   return (
     <div className="compare-wrapper">
-      <h1 className="compare-title">🍽️ Compare Two Products</h1>
+      <h1 className="compare-title"></h1>
 
       <div className="search-pair">
         <SearchBar onSelect={setProduct1} />

@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Line } from "react-chartjs-2";
 import "../components/LineChart.css";
-import "../index.css"
+import "../index.css";
 
 import {
   Chart as ChartJS,
@@ -130,9 +130,9 @@ const LineChart = ({ data, loading }) => {
         const colorEnd = index === 0 ? "#FFD580" : "#81C784"; // Lighter Orange/Green
         return getLineGradient(ctx, colorStart, colorEnd);
       },
-      fill: false, // No fill, just the line
-      borderWidth: 3, // Thicker line for a more prominent appearance
-      pointRadius: 6, // Points on the line
+      fill: false, 
+      borderWidth: 3, 
+      pointRadius: 6, 
       hoverRadius: 8, // Hover effect for points
       tension: 0.4, // Add smoothness to the line
       // Adding shadow to the line itself for depth
