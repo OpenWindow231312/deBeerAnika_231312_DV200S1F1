@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LineChart from "../components/LineChart";
+import Dropdown from "../components/Dropdown"; // Import the Dropdown component
 import "../../src/index.css";
 import "./Timeline.css";
 
@@ -48,25 +49,10 @@ const categoryProducts = {
   ],
 };
 
-const nutrientOptions = {
-  calories: {
-    label: "Calories (kcal)",
-    key: "energy-kcal_100g",
-    color: "#ff6384",
-  },
-  sugar: { label: "Sugar (g)", key: "sugars_100g", color: "#36a2eb" },
-  fat: { label: "Fat (g)", key: "fat_100g", color: "#ffcd56" },
-  salt: { label: "Salt (g)", key: "salt_100g", color: "#4bc0c0" },
-  protein: { label: "Protein (g)", key: "proteins_100g", color: "#9966ff" },
-};
-
 const Timeline = () => {
   const [selectedCategory, setSelectedCategory] = useState("Ice Cream");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [visibleNutrients, setVisibleNutrients] = useState(
-    Object.keys(nutrientOptions)
-  );
 
   const fetchProductsByName = async () => {
     const names = categoryProducts[selectedCategory];
@@ -111,20 +97,43 @@ const Timeline = () => {
 
   const chartData = {
     labels: products.map((p) => p.product_name),
-    datasets: visibleNutrients.map((key) => ({
-      label: nutrientOptions[key].label,
-      data: products.map((p) => p.nutriments?.[nutrientOptions[key].key] || 0),
-      borderColor: nutrientOptions[key].color,
-      backgroundColor: nutrientOptions[key].color,
-      fill: false,
-      tension: 0.3,
-    })),
-  };
-
-  const handleToggle = (key) => {
-    setVisibleNutrients((prev) =>
-      prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
-    );
+    datasets: [
+      {
+        label: "Calories",
+        data: products.map((p) => p.nutriments?.["energy-kcal_100g"] || 0),
+        borderColor: "#FF914D",
+        fill: false,
+        tension: 0.3,
+      },
+      {
+        label: "Sugar",
+        data: products.map((p) => p.nutriments?.["sugars_100g"] || 0),
+        borderColor: "#FFCD56",
+        fill: false,
+        tension: 0.3,
+      },
+      {
+        label: "Fat",
+        data: products.map((p) => p.nutriments?.["fat_100g"] || 0),
+        borderColor: "#4CAF50",
+        fill: false,
+        tension: 0.3,
+      },
+      {
+        label: "Salt",
+        data: products.map((p) => p.nutriments?.["salt_100g"] || 0),
+        borderColor: "#4BC0C0",
+        fill: false,
+        tension: 0.3,
+      },
+      {
+        label: "Protein",
+        data: products.map((p) => p.nutriments?.["proteins_100g"] || 0),
+        borderColor: "#9966FF",
+        fill: false,
+        tension: 0.3,
+      },
+    ],
   };
 
   return (
@@ -132,31 +141,11 @@ const Timeline = () => {
       <h1>📈 Nutritional Timeline</h1>
 
       <div className="dropdown-wrapper">
-        <label>Select a category: </label>
-        <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
-          {Object.keys(categoryProducts).map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="toggle-wrapper">
-        <label>Show nutrients:</label>
-        {Object.keys(nutrientOptions).map((key) => (
-          <label key={key} style={{ marginLeft: "10px" }}>
-            <input
-              type="checkbox"
-              checked={visibleNutrients.includes(key)}
-              onChange={() => handleToggle(key)}
-            />
-            {nutrientOptions[key].label}
-          </label>
-        ))}
+        <Dropdown
+          options={Object.keys(categoryProducts)}
+          selected={selectedCategory}
+          onSelect={setSelectedCategory}
+        />
       </div>
 
       <div className="chart-section">

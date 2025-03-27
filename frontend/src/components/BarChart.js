@@ -17,7 +17,6 @@ const BarChart = ({ product }) => {
 
   const { nutriments } = product;
 
-  // Gradient for normal bars
   const getGradient = (ctx) => {
     const gradient = ctx.createLinearGradient(0, 0, 0, 300);
     gradient.addColorStop(0, "#FF914D"); // Lighter orange
@@ -25,7 +24,6 @@ const BarChart = ({ product }) => {
     return gradient;
   };
 
-  // Gradient for hover effect (more intense)
   const getHoverGradient = (ctx) => {
     const gradient = ctx.createLinearGradient(0, 0, 0, 300);
     gradient.addColorStop(0, "#e86c00"); // Deeper orange
@@ -67,15 +65,15 @@ const BarChart = ({ product }) => {
     animation: { duration: 800 },
     plugins: {
       legend: {
-        display: true, // Enable legend
-        position: "bottom", // Position of legend
+        display: true,
+        position: "bottom",
         labels: {
           font: {
-            family: "Montserrat", // Font family consistent with project
-            size: 14, // Font size for legend
-            weight: "500", // Font weight for legend text
+            family: "Montserrat",
+            size: 14,
+            weight: "500",
           },
-          color: "#004d26", // Dark green color for legend text
+          color: "#004d26",
         },
       },
       tooltip: {
@@ -87,12 +85,15 @@ const BarChart = ({ product }) => {
         titleFont: {
           family: "Montserrat",
           weight: "600",
+          size: 16, // Increase the size of the tooltip title
         },
         bodyFont: {
           family: "Montserrat",
+          size: 16, // Increase the font size of the body text
         },
-        padding: 10,
+        padding: 15, // Increase the padding for better spacing
         cornerRadius: 6,
+        boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)", // Add shadow for depth
       },
     },
     scales: {

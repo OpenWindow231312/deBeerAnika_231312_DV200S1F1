@@ -2,6 +2,7 @@ import React, { useState, lazy, Suspense, useEffect } from "react";
 import SearchBar from "../components/Searchbar";
 import SkeletonLoader from "../components/SkeletonLoader";
 import "./Compare.css";
+import "../index.css";
 
 const BarChart = lazy(() => import("../components/BarChartCompare"));
 const PieChart = lazy(() => import("../components/PieChart"));

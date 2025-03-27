@@ -123,11 +123,11 @@ const BarChartCompare = ({ product1, product2 }) => {
         position: "bottom",
         labels: {
           font: {
-            family: "Montserrat", // Consistent font family
-            size: 14, // Size of the text in the legend
-            weight: "500", // Font weight for consistency
+            family: "Montserrat",
+            size: 14,
+            weight: "500",
           },
-          color: "#004d26", // Dark green color for legend text
+          color: "#004d26",
         },
       },
       tooltip: {
@@ -145,6 +145,40 @@ const BarChartCompare = ({ product1, product2 }) => {
         },
         padding: 10,
         cornerRadius: 6,
+        boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)", // Added box shadow for depth
+        callbacks: {
+          label: function (context) {
+            let label = context.dataset.label || "";
+            let value = context.raw;
+            let explanation = "";
+
+            switch (context.label) {
+              case "Sugar":
+                explanation =
+                  "Energy source, but too much is not good for health.";
+                break;
+              case "Fat":
+                explanation =
+                  "Vital for energy storage, but excess fat can cause health issues.";
+                break;
+              case "Salt":
+                explanation =
+                  "Excess salt intake can lead to high blood pressure.";
+                break;
+              case "Protein":
+                explanation = "Important for muscle repair and building.";
+                break;
+              case "Calories":
+                explanation =
+                  "Energy content. A balance of calories is essential.";
+                break;
+              default:
+                explanation = "Nutritional value.";
+            }
+
+            return [`${label}: ${value}g`, explanation];
+          },
+        },
       },
     },
     scales: {

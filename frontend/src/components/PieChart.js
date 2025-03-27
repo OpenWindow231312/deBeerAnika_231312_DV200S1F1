@@ -48,20 +48,46 @@ const PieChart = ({ product }) => {
         },
       },
       tooltip: {
-        backgroundColor: "#fff",
-        titleColor: "#004d26",
-        bodyColor: "#000",
-        borderColor: "#004d26",
-        borderWidth: 1,
+        backgroundColor: "#fff", // White background
+        titleColor: "#004d26", // Dark green title
+        bodyColor: "#000", // Black body text
+        borderColor: "#004d26", // Dark green border
+        borderWidth: 1, // Border width
+        padding: 12, // Increased padding
+        cornerRadius: 6, // Rounded corners
         titleFont: {
           family: "Montserrat",
           weight: "600",
+          size: 18, // Increased title font size
         },
         bodyFont: {
           family: "Montserrat",
+          size: 16, // Increased body font size
         },
-        padding: 10,
-        cornerRadius: 6,
+        callbacks: {
+          label: function (context) {
+            let label = context.dataset.label || "";
+            let value = context.raw;
+            let explanation = "";
+
+            switch (context.label) {
+              case "Carbohydrates":
+                explanation = "Main energy source for the body.";
+                break;
+              case "Fat":
+                explanation = "Provides energy, store fat.";
+                break;
+              case "Protein":
+                explanation = "Helps build and repair muscle and tissues.";
+                break;
+              default:
+                explanation = "Nutritional information.";
+            }
+
+            // Return value and explanation in separate lines
+            return [`${label}: ${value}g`, explanation];
+          },
+        },
       },
     },
   };

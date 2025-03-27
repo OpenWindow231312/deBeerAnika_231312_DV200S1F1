@@ -1,16 +1,14 @@
 .barChartBody {
     width: 100%;
-    height: 400px;
+    height: 480px;
     background-color: white;
     border-radius: 17.61px;
     padding: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
-    /* Center the chart in the container */
-    box-sizing: border-box;
 }
+
 .barChartBody .chartjs-render-monitor {
     animation: barGrow 1s ease-out forwards;
 }
