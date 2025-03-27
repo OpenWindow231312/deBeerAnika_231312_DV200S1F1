@@ -1,70 +1,107 @@
-# Getting Started with Create React App
+# FactFork - Product Comparison App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+**FactFork** is a product comparison app that allows users to compare two products based on their nutritional values. The app allows users to search for products, view key product details, and compare attributes such as calories, fat, protein, and more. The data is retrieved from the [Open Food Facts API](https://world.openfoodfacts.org/), and various charts (bar charts, pie charts, and radar charts) are used to display nutritional information.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Product Search**: Allows users to search for products.
+- **Product Comparison**: Compare two products side by side.
+- **Nutritional Insights**: Displays charts for calories, fat, sugar, protein, and other nutritional data.
+- **Local Storage**: Stores selected products in local storage for persistence across sessions.
+- **Dynamic Visualization**: Uses dynamic charts (BarChart, PieChart, RadarChart) to visualize product comparison.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **React.js**: Front-end library to build user interfaces.
+- **React Router**: For routing between different pages (if applicable).
+- **Axios**: For making API requests.
+- **Chart.js**: For data visualization (Bar, Pie, and Radar charts).
+- **CSS**: For styling and layout.
+- **React Suspense and Lazy Loading**: For efficient loading of chart components.
+- **Local Storage**: For storing user-selected products.
+- **Open Food Facts API**: For fetching product data.
 
-### `npm test`
+## API Documentation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The app uses the [Open Food Facts API](https://world.openfoodfacts.org/) to fetch product nutritional information.
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Before you begin, ensure you have the following installed:
+- **Node.js** (v14 or later)
+- **npm** (Node package manager)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Clone the Repository
 
-### `npm run eject`
+```bash
+git clone https://github.com/OpenWindow231312/deBeerAnika_231312_DV200S1F1.git
+cd deBeerAnika_231312_DV200S1F1
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Install Dependencies
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Run the following command to install the necessary dependencies:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+npm install
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Development
 
-## Learn More
+Run the Application Locally
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Once dependencies are installed, run the app in development mode:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+npm start
 
-### Code Splitting
+The application will be accessible at http://localhost:3000.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Building the App
 
-### Analyzing the Bundle Size
+To create a production build of the app, run:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+npm run build
 
-### Making a Progressive Web App
+This will generate a build directory with the production-optimized version of your app.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Usage
+	1.	Search for Products: Use the search bar to find products by name.
+	2.	Select Products to Compare: After selecting two products, their nutritional information will be displayed side by side.
+	3.	View Nutritional Charts: The comparison data will be visualized in bar charts, pie charts, and radar charts.
+	4.	Compare Meta Data: Quantity and category information will be displayed for each product.
 
-### Advanced Configuration
+Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+/src
+  /components
+    - BarChartCompare.js
+    - PieChart.js
+    - RadarChartCompare.js
+    - WidgetHeaderCompare.js
+    - Searchbar.js
+    - SkeletonLoader.js
+  /pages
+    - Compare.js
+    - Timeline.js
+  /styles
+    - Compare.css
+    - Timeline.css
+  /assets
+    - Vegcolours.svg
+  App.js
+  index.js
+  package.json
+  README.md
 
-### Deployment
+Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+We welcome contributions! If you’d like to improve this app or fix bugs, please fork the repository and submit a pull request. Be sure to follow the project’s code of conduct and include detailed descriptions of any changes.
 
-### `npm run build` fails to minify
+License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+Author
+
+This project was created by Anika de Beer, student number 231312, at Open Window Institute.
