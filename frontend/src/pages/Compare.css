@@ -1,0 +1,164 @@
+/* ===========================
+   Compare Page Styling
+=========================== */
+
+.compare-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    background: url("../assets/background texture.svg") repeat;
+    background-size: cover;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.compare-title {
+    font-size: 36px;
+    font-weight: 600;
+    color: #004d26;
+    margin-bottom: 30px;
+}
+
+/* ---------------- Search Pair ---------------- */
+.search-pair {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 40px;
+}
+
+.searchbar-container {
+    flex: 1;
+    max-width: 400px;
+}
+
+/* ---------------- Product Columns ---------------- */
+.compare-columns {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.compare-card {
+    width: 300px;
+    background-color: white;
+    border-radius: 18px;
+    box-shadow: 0 2px 12px rgba(0, 128, 0, 0.12);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.compare-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 128, 0, 0.2);
+}
+
+.compare-product-name {
+    font-size: 22px;
+    font-weight: 600;
+    color: #004d26;
+    text-align: center;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.compare-meta {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.compare-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 12px;
+}
+
+/* ---------------- Label Tag ---------------- */
+.label-tag {
+    background-color: #ff914d;
+    color: white;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: 14px;
+    text-transform: uppercase;
+    margin-top: 6px;
+}
+
+/* ---------------- Chart Layout ---------------- */
+.compare-chart {
+    width: 100%;
+    max-width: 1100px;
+    background-color: white;
+    border-radius: 17.61px;
+    box-shadow: 0px 2px 12px rgba(0, 128, 0, 0.1);
+    padding: 30px 20px 20px;
+    margin-bottom: 50px;
+}
+
+.chart-title {
+    font-size: 19.07px;
+    font-weight: 500;
+    color: #004d26;
+    font-family: "Montserrat", sans-serif;
+    margin-bottom: 15px;
+    width: 100%;
+    text-align: center;
+}
+
+/* ---------------- Pie Chart Row ---------------- */
+.compare-pie-row {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.compare-pie-col {
+    background-color: white;
+    border-radius: 17.61px;
+    box-shadow: 0px 2px 12px rgba(0, 128, 0, 0.1);
+    padding: 30px 20px 20px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.compare-pie-col h2 {
+    font-size: 19.07px;
+    font-weight: 500;
+    color: #004d26;
+    text-align: center;
+    margin-bottom: 20px;
+}

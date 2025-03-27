@@ -4,6 +4,7 @@ import "../components/Searchbar.css";
 const SearchBar = ({ onSelect }) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [isSelected, setIsSelected] = useState(false);
   const containerRef = useRef(null);
 
   const handleSearch = async () => {
@@ -24,11 +25,17 @@ const SearchBar = ({ onSelect }) => {
 
   const handleSelect = (product) => {
     onSelect(product);
-    setResults([]); // close dropdown after selection
-    setQuery(""); // optionally clear search input
+    setResults([]);
+    setQuery(product.product_name || "");
+    setIsSelected(true);
   };
 
-  // Detect click outside and close dropdown
+  const clearSelection = () => {
+    setQuery("");
+    setIsSelected(false);
+    onSelect(null); // notify parent to clear selection
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -52,10 +59,17 @@ const SearchBar = ({ onSelect }) => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           className="searchbar-input"
+          disabled={isSelected} // Disable after selection
         />
-        <button className="searchbar-button" onClick={handleSearch}>
-          Search
-        </button>
+        {isSelected ? (
+          <button className="searchbar-clear-button" onClick={clearSelection}>
+            ✕
+          </button>
+        ) : (
+          <button className="searchbar-button" onClick={handleSearch}>
+            Search
+          </button>
+        )}
       </div>
 
       {results.length > 0 && (
