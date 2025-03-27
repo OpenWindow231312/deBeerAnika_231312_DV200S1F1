@@ -5,6 +5,7 @@ import WidgetHeaderCompare from "../components/WidgetHeaderCompare"; // Importin
 import "./Compare.css";
 import "../index.css";
 
+//lazy loading
 const BarChart = lazy(() => import("../components/BarChartCompare"));
 const PieChart = lazy(() => import("../components/PieChart"));
 const RadarChart = lazy(() => import("../components/RadarChartCompare"));
@@ -41,11 +42,11 @@ const Compare = () => {
     <div className="compare-wrapper">
       <div className="compare-container">
         <WidgetHeaderCompare title="" />
-
         <div className="search-pair">
           <SearchBar onSelect={setProduct1} />
           <SearchBar onSelect={setProduct2} />
         </div>
+
 
         {product1 && product2 && (
           <>
