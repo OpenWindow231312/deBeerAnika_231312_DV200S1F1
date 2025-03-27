@@ -5,6 +5,7 @@
 .compare-wrapper {
     width: 100%;
     min-height: 100vh;
+    position: relative;
     background: url("../assets/Vegcolours.svg") repeat;
     background-size: cover;
     font-family: "Montserrat", sans-serif;
@@ -14,6 +15,17 @@
     padding: 40px 20px;
     box-sizing: border-box;
     animation: fadeIn 0.6s ease-in-out;
+}
+
+.compare-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 0;
 }
 
 @keyframes fadeIn {
@@ -28,17 +40,62 @@
     }
 }
 
-.compare-title {
+/* Main container for timeline content */
+.compare-container {
+    width: 1300px;
+    background-color: white;
+    border-radius: 17.61px;
+    padding: 30px 20px;
+    box-shadow: 0 2px 12px rgba(0, 128, 0, 0.1);
+    z-index: 1;
+    margin-top: 100px;
+    text-align: center;
+}
+
+/* Widget Header Styling */
+.widgetHeader {
+    margin-bottom: 20px;
+    position: relative;
+    padding-right: 20px;
+    text-align: right;
+    margin-top: -30px;
+    /* Move up by 20px */
+    margin-left: 20px;
+}
+
+.widgetHeader h1 {
     font-size: 36px;
     font-weight: 600;
     color: #004d26;
     margin-bottom: 30px;
+    z-index: 1;
+    position: relative;
+    text-align: right;
+}
+
+.widgetHeader h1::before {
+    content: "Compare Your Favourites";
+    position: absolute;
+    right: 0;
+    transform: translateY(-50%);
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+    color: white;
+    font-size: 28px;
+    font-weight: 600;
+    margin-top: -62px;
+    margin-right: -20px;
+    padding-right: 90px;
+    text-align: right;
 }
 
 /* ---------------- Search Pair ---------------- */
 .search-pair {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: 30px;
     width: 100%;
     max-width: 1000px;
@@ -47,20 +104,20 @@
 
 .searchbar-container {
     flex: 1;
-    max-width: 400px;
+    max-width: 450px;
 }
 
 /* ---------------- Product Columns ---------------- */
 .compare-columns {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 30px;
     margin-bottom: 40px;
     flex-wrap: wrap;
 }
 
 .compare-card {
-    width: 300px;
+    width: 500px;
     background-color: white;
     border-radius: 18px;
     box-shadow: 0 2px 12px rgba(0, 128, 0, 0.12);
@@ -79,24 +136,46 @@
 .compare-product-name {
     font-size: 22px;
     font-weight: 600;
-    color: #004d26;
-    text-align: center;
+    color: #4CAF50;
+    /* Green color */
+    background-color: #E8F5E9;
+    /* Light green background */
+    padding: 8px 12px;
+    border-radius: 8px;
     margin-bottom: 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
+    text-align: center;
 }
 
+/* Meta Styling */
 .compare-meta {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    /* Add some space between quantity and category */
     font-size: 15px;
-    color: #555;
     margin-bottom: 10px;
+    color: white;
+}
+
+.compare-meta .quantity,
+.compare-meta .category {
+    background-color: #4CAF50;
+    /* Green background for meta data */
+    color: white;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 14px;
 }
 
 .compare-image {
     width: 100%;
-    height: auto;
+    height: 300px;
+    object-fit: contain;
+    /* Ensure the image fits without stretching */
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 12px;
@@ -116,13 +195,14 @@
 
 /* ---------------- Chart Layout ---------------- */
 .compare-chart {
-    width: 100%;
-    max-width: 1100px;
+    width: 1030px;
     background-color: white;
     border-radius: 17.61px;
     box-shadow: 0px 2px 12px rgba(0, 128, 0, 0.1);
     padding: 30px 20px 20px;
     margin-bottom: 50px;
+    align-items: center;
+    align-content: center;
 }
 
 .chart-title {
@@ -161,4 +241,10 @@
     color: #004d26;
     text-align: center;
     margin-bottom: 20px;
+}
+
+/* Add center alignment for the chart */
+.barChartBody {
+    align-items: center;
+    align-content: center;
 }

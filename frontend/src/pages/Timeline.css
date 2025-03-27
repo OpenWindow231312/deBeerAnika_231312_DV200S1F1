@@ -57,6 +57,7 @@
     z-index: 1;
     position: relative;
     text-align: right;
+    margin-top: 20px;
 }
 
 .widgetHeader h1::before {
@@ -139,16 +140,13 @@ width: 100%;
     align-items: center;
     align-content: center;
     margin: 0 auto;
-    /* Center the chart horizontally */
 }
 
 /* Line Chart Styles */
 .lineChartBody {
     width: 100%;
     max-width: 1000px;
-    /* Increased max width for the chart */
     height: 500px;
-    /* Increased height for better visibility */
     background-color: white;
     border-radius: 17.61px;
     padding: 20px;

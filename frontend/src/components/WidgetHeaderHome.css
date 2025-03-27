@@ -1,12 +1,12 @@
 /* Widget Header for Title */
-.widgetHeader {
+.widgetHeaderHome {
     width: 100%;
     text-align: right;
     margin-bottom: 20px;
     position: relative;
 }
 
-.widgetHeader h1 {
+.widgetHeaderHome h1 {
     font-size: 36px;
     font-weight: 600;
     color: #004d26;
@@ -17,8 +17,8 @@
 }
 
 /* Dynamic title using the h1 directly */
-.widgetHeader h1::before {
-    content: "Nutritional Information";
+.widgetHeaderHome h1::before {
+    content: "Nutrition at a glance";
     position: absolute;
     right: 0;
     transform: translateY(-50%);

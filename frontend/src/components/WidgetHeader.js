@@ -4,7 +4,7 @@ import "../components/WidgetHeader.css"; // Add your CSS here
 const WidgetHeader = ({ title }) => {
   return (
     <div className="widgetHeader">
-      <h1>{title}</h1>
+      <h1>{}</h1> {/* Dynamic title */}
     </div>
   );
 };

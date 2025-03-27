@@ -1,6 +1,7 @@
 import React, { useState, lazy, Suspense, useEffect } from "react";
 import SearchBar from "../components/Searchbar";
 import SkeletonLoader from "../components/SkeletonLoader";
+import WidgetHeaderCompare from "../components/WidgetHeaderCompare"; // Importing WidgetHeader
 import "./Compare.css";
 import "../index.css";
 
@@ -38,66 +39,69 @@ const Compare = () => {
 
   return (
     <div className="compare-wrapper">
-      <h1 className="compare-title"></h1>
+      <div className="compare-container">
+        {/* Adding WidgetHeader with dynamic title */}
+        <WidgetHeaderCompare title="" />
 
-      <div className="search-pair">
-        <SearchBar onSelect={setProduct1} />
-        <SearchBar onSelect={setProduct2} />
+        <div className="search-pair">
+          <SearchBar onSelect={setProduct1} />
+          <SearchBar onSelect={setProduct2} />
+        </div>
+
+        {product1 && product2 && (
+          <>
+            {/* Product Comparison Columns */}
+            <div className="compare-columns">
+              {[product1, product2].map((product, idx) => (
+                <div className="compare-card" key={idx}>
+                  <h2 className="compare-product-name">
+                    {product.product_name || "Unnamed Product"}
+                  </h2>
+                  <p className="compare-meta">
+                    {product.quantity} —{" "}
+                    {product.categories_tags?.[0]?.replace("en:", "")}
+                  </p>
+                  <img
+                    src={product.image_front_url}
+                    alt="product"
+                    className="compare-image"
+                  />
+                  {product.labels_tags?.length > 0 && (
+                    <div className="label-tag">
+                      {product.labels_tags[0].replace("en:", "").toUpperCase()}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Charts */}
+            <Suspense fallback={<SkeletonLoader />}>
+              <div className="compare-chart">
+                <h2 className="chart-title">Nutritional Values</h2>
+                <BarChart product1={product1} product2={product2} />
+              </div>
+
+              {/* Pie Charts */}
+              <div className="compare-pie-row">
+                <div className="compare-pie-col">
+                  <h2 className="chart-title">{product1.product_name}</h2>
+                  <PieChart product={product1} />
+                </div>
+                <div className="compare-pie-col">
+                  <h2 className="chart-title">{product2.product_name}</h2>
+                  <PieChart product={product2} />
+                </div>
+              </div>
+
+              <div className="compare-chart">
+                <h2 className="chart-title">Additive & Nutrition Profile</h2>
+                <RadarChart product1={product1} product2={product2} />
+              </div>
+            </Suspense>
+          </>
+        )}
       </div>
-
-      {product1 && product2 && (
-        <>
-          {/* Product Comparison Columns */}
-          <div className="compare-columns">
-            {[product1, product2].map((product, idx) => (
-              <div className="compare-card" key={idx}>
-                <h2 className="compare-product-name">
-                  {product.product_name || "Unnamed Product"}
-                </h2>
-                <p className="compare-meta">
-                  {product.quantity} —{" "}
-                  {product.categories_tags?.[0]?.replace("en:", "")}
-                </p>
-                <img
-                  src={product.image_front_url}
-                  alt="product"
-                  className="compare-image"
-                />
-                {product.labels_tags?.length > 0 && (
-                  <div className="label-tag">
-                    {product.labels_tags[0].replace("en:", "").toUpperCase()}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* Charts */}
-          <Suspense fallback={<SkeletonLoader />}>
-            <div className="compare-chart">
-              <h2 className="chart-title">Nutritional Values</h2>
-              <BarChart product1={product1} product2={product2} />
-            </div>
-
-            {/* Pie Charts */}
-            <div className="compare-pie-row">
-              <div className="compare-pie-col">
-                <h2 className="chart-title">{product1.product_name}</h2>
-                <PieChart product={product1} />
-              </div>
-              <div className="compare-pie-col">
-                <h2 className="chart-title">{product2.product_name}</h2>
-                <PieChart product={product2} />
-              </div>
-            </div>
-
-            <div className="compare-chart">
-              <h2 className="chart-title">Additive & Nutrition Profile</h2>
-              <RadarChart product1={product1} product2={product2} />
-            </div>
-          </Suspense>
-        </>
-      )}
     </div>
   );
 };
