@@ -74,7 +74,7 @@ const Compare = () => {
           {/* Charts */}
           <Suspense fallback={<SkeletonLoader />}>
             <div className="compare-chart">
-              <h2 className="chart-title">📊 Nutritional Values</h2>
+              <h2 className="chart-title">Nutritional Values</h2>
               <BarChart product1={product1} product2={product2} />
             </div>
 
@@ -91,7 +91,7 @@ const Compare = () => {
             </div>
 
             <div className="compare-chart">
-              <h2 className="chart-title">🧭 Additive & Nutrition Profile</h2>
+              <h2 className="chart-title">Additive & Nutrition Profile</h2>
               <RadarChart product1={product1} product2={product2} />
             </div>
           </Suspense>

@@ -66,7 +66,18 @@ const BarChart = ({ product }) => {
     responsive: true,
     animation: { duration: 800 },
     plugins: {
-      legend: { display: false },
+      legend: {
+        display: true, // Enable legend
+        position: "bottom", // Position of legend
+        labels: {
+          font: {
+            family: "Montserrat", // Font family consistent with project
+            size: 14, // Font size for legend
+            weight: "500", // Font weight for legend text
+          },
+          color: "#004d26", // Dark green color for legend text
+        },
+      },
       tooltip: {
         backgroundColor: "#ffffff",
         borderColor: "#004d26",
