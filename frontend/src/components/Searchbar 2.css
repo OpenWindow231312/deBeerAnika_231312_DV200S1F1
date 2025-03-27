@@ -1,0 +1,114 @@
+.searchbar-container {
+  position: relative;
+  z-index: 1000;
+}
+
+.searchbar-input-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.searchbar-input {
+  flex: 1;
+  height: 48px;
+  padding: 12px 16px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.searchbar-input:focus {
+  border-color: #FF914D;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 145, 77, 0.2);
+}
+
+.searchbar-button {
+  height: 48px;
+  padding: 0 18px;
+  border: none;
+  background-color: #FF914D;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.searchbar-button:hover {
+  background-color: #e6732a;
+}
+
+/* Dropdown */
+.searchbar-dropdown {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  list-style: none;
+  margin-top: 10px;
+  z-index: 9999;
+}
+
+.searchbar-option {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+}
+
+.searchbar-option button {
+  padding: 6px 12px;
+  border: 1px solid #004d26;
+  background-color: transparent;
+  color: #004d26;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.searchbar-option:hover {
+  background-color: #f2fff6;
+}
+
+.searchbar-option button:hover {
+  background-color: #004d26;
+  color: white;
+}
+
+.searchbar-clear-button {
+  height: 48px;
+  /* Matches the input height exactly */
+  padding: 0 18px;
+  border: none;
+  background-color: #ff914d;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.searchbar-clear-button:hover {
+  background-color: #e6732a;
+}

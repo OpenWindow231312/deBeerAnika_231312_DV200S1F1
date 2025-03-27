@@ -1,0 +1,32 @@
+.barChartBody {
+    width: 789.94px;
+    height: 350px;
+    background-color: white;
+    border-radius: 17.61px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chartjs-legend {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #004d26;
+}
+
+.chartjs-legend li {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.chartjs-legend li span {
+    margin-right: 10px;
+}

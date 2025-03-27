@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 81.35 37.59">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 14.75px;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        fill: #221f20;
+      }
+
+      .cls-1, .cls-3 {
+        font-family: Montserrat-Regular, Montserrat;
+      }
+
+      .cls-4 {
+        letter-spacing: 0em;
+      }
+
+      .cls-5 {
+        letter-spacing: -.03em;
+      }
+
+      .cls-6 {
+        letter-spacing: 0em;
+      }
+
+      .cls-7 {
+        letter-spacing: 0em;
+      }
+
+      .cls-8 {
+        letter-spacing: 0em;
+      }
+
+      .cls-3 {
+        font-size: 22.3px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_3">
+    <g>
+      <g>
+        <path class="cls-2" d="M31.71,21.85l-11.18.08.11,14.03-2.6.02-.11-14.03-12.08.09-.02-2.87,28.47-.2.15,18.61-2.6.02-.12-15.74Z"/>
+        <path class="cls-2" d="M25.74,3.31l2.6-.02.15,18.61L.02,22.1l-.02-2.87,12.08-.09-.11-14.03,2.6-.02.11,14.03,11.18-.08-.12-15.74Z"/>
+      </g>
+      <text class="cls-3" transform="translate(23.56 18.96)"><tspan class="cls-5" x="0" y="0">F</tspan><tspan class="cls-8" x="13.38" y="0">A</tspan><tspan class="cls-6" x="29.15" y="0">C</tspan><tspan x="44.99" y="0">T</tspan></text>
+      <text class="cls-1" transform="translate(38.32 32.53)"><tspan class="cls-7" x="0" y="0">F</tspan><tspan class="cls-4" x="9.2" y="0">ORK</tspan></text>
+    </g>
+  </g>
+</svg>

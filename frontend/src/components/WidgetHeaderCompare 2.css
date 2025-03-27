@@ -1,0 +1,37 @@
+/* Widget Header for Title */
+.widgetHeaderCompare {
+    width: 100%;
+    text-align: right;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.widgetHeaderCompare h1 {
+    font-size: 36px;
+    font-weight: 600;
+    color: #004d26;
+    z-index: 1;
+    padding-right: 20px;
+    text-align: right;
+    position: relative;
+}
+
+/* Dynamic title using the h1 directly */
+.widgetHeaderCompare h1::before {
+    content: "Compare Your Favourites";
+    position: absolute;
+    right: 0;
+    transform: translateY(-50%);
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+    color: white;
+    font-size: 28px;
+    font-weight: 600;
+    margin-top: -62px;
+    margin-right: -20px;
+    padding-right: 90px;
+    text-align: right;
+}

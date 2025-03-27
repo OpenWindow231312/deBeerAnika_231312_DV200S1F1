@@ -48,7 +48,7 @@ const RadarChartSingle = ({ product }) => {
       {
         label: product.product_name,
         data: [nova, additives, saturatedFat, salt],
-        backgroundColor: gradientFill || "rgba(255, 145, 77, 0.2)",
+        backgroundColor: gradientFill || "rgba(255, 145, 77, 0.3)",
         borderColor: "#cc5500",
         pointBackgroundColor: "#cc5500",
         pointBorderColor: "#fff",

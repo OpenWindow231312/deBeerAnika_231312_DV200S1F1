@@ -40,7 +40,6 @@ const Compare = () => {
   return (
     <div className="compare-wrapper">
       <div className="compare-container">
-        {/* Adding WidgetHeader with dynamic title */}
         <WidgetHeaderCompare title="" />
 
         <div className="search-pair">
@@ -57,10 +56,6 @@ const Compare = () => {
                   <h2 className="compare-product-name">
                     {product.product_name || "Unnamed Product"}
                   </h2>
-                  <p className="compare-meta">
-                    {product.quantity} —{" "}
-                    {product.categories_tags?.[0]?.replace("en:", "")}
-                  </p>
                   <img
                     src={product.image_front_url}
                     alt="product"
@@ -71,6 +66,14 @@ const Compare = () => {
                       {product.labels_tags[0].replace("en:", "").toUpperCase()}
                     </div>
                   )}
+                  <div className="label-tag">
+                    <span className="quantity">{product.quantity}</span>
+                  </div>
+                  <div className="label-tag">
+                    <span className="category">
+                      {product.categories_tags?.[0]?.replace("en:", "")}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>

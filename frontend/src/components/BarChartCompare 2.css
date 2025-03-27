@@ -1,0 +1,34 @@
+.barChartBody {
+    width: 100%;
+    height: 480px;
+    background-color: white;
+    border-radius: 17.61px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.barChartBody .chartjs-render-monitor {
+    animation: barGrow 1s ease-out forwards;
+}
+
+.chartjs-legend {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.chartjs-legend li {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+@keyframes barGrow {
+    0% {
+        transform: scaleY(0);
+    }
+
+    100% {
+        transform: scaleY(1);
+    }
+}
