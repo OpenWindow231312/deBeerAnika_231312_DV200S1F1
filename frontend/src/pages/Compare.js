@@ -1,7 +1,6 @@
-import React, { useState, useEffect, lazy, Suspense } from "react";
+import React, { useState, lazy, Suspense, useEffect } from "react";
 import SearchBar from "../components/Searchbar";
 import SkeletonLoader from "../components/SkeletonLoader";
-import "../../src/index.css";
 import "./Compare.css";
 
 const BarChart = lazy(() => import("../components/BarChartCompare"));
@@ -12,115 +11,87 @@ const Compare = () => {
   const [product1, setProduct1] = useState(null);
   const [product2, setProduct2] = useState(null);
 
-  // Function to load products from localStorage
-  const loadStoredProducts = () => {
-    const storedProduct1 = localStorage.getItem("product1");
-    const storedProduct2 = localStorage.getItem("product2");
-
-    if (storedProduct1 && storedProduct2) {
-      setProduct1(JSON.parse(storedProduct1));
-      setProduct2(JSON.parse(storedProduct2));
-    }
-  };
-
-  // Function to store products in localStorage
-  const storeProducts = (product1, product2) => {
-    localStorage.setItem("product1", JSON.stringify(product1));
-    localStorage.setItem("product2", JSON.stringify(product2));
-  };
-
-  // UseEffect to load products from localStorage when the component is mounted
+  // Load products from localStorage if they exist
   useEffect(() => {
-    loadStoredProducts();
+    const savedProduct1 = localStorage.getItem("product1");
+    const savedProduct2 = localStorage.getItem("product2");
+
+    if (savedProduct1) {
+      setProduct1(JSON.parse(savedProduct1));
+    }
+
+    if (savedProduct2) {
+      setProduct2(JSON.parse(savedProduct2));
+    }
   }, []);
 
-  // Update the products and store them in localStorage
-  const handleSelectProduct1 = (product) => {
-    setProduct1(product);
-    storeProducts(product, product2);
-  };
-
-  const handleSelectProduct2 = (product) => {
-    setProduct2(product);
-    storeProducts(product1, product);
-  };
+  // Store products in localStorage whenever they change
+  useEffect(() => {
+    if (product1) {
+      localStorage.setItem("product1", JSON.stringify(product1));
+    }
+    if (product2) {
+      localStorage.setItem("product2", JSON.stringify(product2));
+    }
+  }, [product1, product2]);
 
   return (
-    <div className="compare-container container">
-      <h1>🍽️ Compare Two Products</h1>
+    <div className="compare-wrapper">
+      <h1 className="compare-title">🍽️ Compare Two Products</h1>
 
-      <div className="row mb-4">
-        <div className="col-md-6">
-          <SearchBar onSelect={handleSelectProduct1} />
-        </div>
-        <div className="col-md-6">
-          <SearchBar onSelect={handleSelectProduct2} />
-        </div>
+      <div className="search-pair">
+        <SearchBar onSelect={setProduct1} />
+        <SearchBar onSelect={setProduct2} />
       </div>
 
       {product1 && product2 && (
         <>
-          {/* Product Columns */}
+          {/* Product Comparison Columns */}
           <div className="compare-columns">
-            <div className="compare-column">
-              <h5>{product1.product_name}</h5>
-              <p className="text-muted">
-                {product1.quantity} —{" "}
-                {product1.categories_tags?.[0]?.replace("en:", "")}
-              </p>
-              <img
-                className="product-image"
-                src={product1.image_front_url}
-                alt="product 1"
-              />
-              {product1.labels_tags?.length > 0 && (
-                <div className="label-tag">
-                  {product1.labels_tags[0].replace("en:", "").toUpperCase()}
-                </div>
-              )}
-            </div>
-
-            <div className="compare-column">
-              <h5>{product2.product_name}</h5>
-              <p className="text-muted">
-                {product2.quantity} —{" "}
-                {product2.categories_tags?.[0]?.replace("en:", "")}
-              </p>
-              <img
-                className="product-image"
-                src={product2.image_front_url}
-                alt="product 2"
-              />
-              {product2.labels_tags?.length > 0 && (
-                <div className="label-tag">
-                  {product2.labels_tags[0].replace("en:", "").toUpperCase()}
-                </div>
-              )}
-            </div>
+            {[product1, product2].map((product, idx) => (
+              <div className="compare-card" key={idx}>
+                <h2 className="compare-product-name">
+                  {product.product_name || "Unnamed Product"}
+                </h2>
+                <p className="compare-meta">
+                  {product.quantity} —{" "}
+                  {product.categories_tags?.[0]?.replace("en:", "")}
+                </p>
+                <img
+                  src={product.image_front_url}
+                  alt="product"
+                  className="compare-image"
+                />
+                {product.labels_tags?.length > 0 && (
+                  <div className="label-tag">
+                    {product.labels_tags[0].replace("en:", "").toUpperCase()}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
 
-          {/* Bar Chart */}
+          {/* Charts */}
           <Suspense fallback={<SkeletonLoader />}>
-            <div className="chart-wrapper mt-4">
-              <h5>📊 Nutritional Values</h5>
+            <div className="compare-chart">
+              <h2 className="chart-title">📊 Nutritional Values</h2>
               <BarChart product1={product1} product2={product2} />
             </div>
 
             {/* Pie Charts */}
-            <div className="pie-chart-row">
-              <div className="pie-chart-col">
-                <h6 className="text-center">{product1.product_name}</h6>
+            <div className="compare-pie-row">
+              <div className="compare-pie-col">
+                <h2 className="chart-title">{product1.product_name}</h2>
                 <PieChart product={product1} />
               </div>
-              <div className="pie-chart-col">
-                <h6 className="text-center">{product2.product_name}</h6>
+              <div className="compare-pie-col">
+                <h2 className="chart-title">{product2.product_name}</h2>
                 <PieChart product={product2} />
               </div>
             </div>
 
-            {/* Radar Chart for Additive & Nutrition */}
-            <div className="chart-wrapper mt-4">
-              <h5>🧭 Additive & Nutrition Profile</h5>
+            <div className="compare-chart">
+              <h2 className="chart-title">🧭 Additive & Nutrition Profile</h2>
               <RadarChart product1={product1} product2={product2} />
             </div>
           </Suspense>
