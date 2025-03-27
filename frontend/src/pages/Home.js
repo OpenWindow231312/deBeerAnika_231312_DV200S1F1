@@ -36,7 +36,6 @@ const Home = () => {
       <div className="dashboard-layout">
         {/* Top Row */}
         <div className="top-row">
-          {/* Left Section */}
           <div className="left-section">
             <div className="search-box">
               <SearchBar onSelect={setSelectedProduct} />
@@ -61,32 +60,29 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Bar Chart Widget */}
+          {/* Bar Chart */}
           <div className="bar-chart-container">
-            <div className="bar-chart-body">
-              <Suspense fallback={<div className="spinner"></div>}>
-                <BarChart product={selectedProduct} />
-              </Suspense>
-            </div>
+            <h2 className="chart-title">NUTRITION BREAKDOWN</h2>
+            <Suspense fallback={<div className="spinner"></div>}>
+              <BarChart product={selectedProduct} />
+            </Suspense>
           </div>
         </div>
 
         {/* Bottom Row */}
         <div className="bottom-row">
           <div className="pie-chart-container">
-            <div className="pie-chart-body">
-              <Suspense fallback={<div className="spinner"></div>}>
-                <PieChart product={selectedProduct} />
-              </Suspense>
-            </div>
+            <h2 className="chart-title">MACRO RATIO</h2>
+            <Suspense fallback={<div className="spinner"></div>}>
+              <PieChart product={selectedProduct} />
+            </Suspense>
           </div>
 
           <div className="radar-chart-container">
-            <div className="radar-chart-body">
-              <Suspense fallback={<div className="spinner"></div>}>
-                <RadarChartSingle product={selectedProduct} />
-              </Suspense>
-            </div>
+            <h2 className="chart-title">ADDITIVE AWARENESS</h2>
+            <Suspense fallback={<div className="spinner"></div>}>
+              <RadarChartSingle product={selectedProduct} />
+            </Suspense>
           </div>
         </div>
       </div>

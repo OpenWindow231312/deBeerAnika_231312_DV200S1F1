@@ -28,7 +28,8 @@ body {
   --shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
 }
 
-/* Reusable Classes */
+/* ========== Reusable Classes ========== */
+
 .card {
   background-color: var(--bg-card);
   border-radius: var(--radius);
@@ -36,6 +37,7 @@ body {
   padding: 1rem;
 }
 
+/* Spinner Loader */
 .spinner {
   border: 4px solid #f3f3f3;
   border-top: 4px solid var(--primary);
@@ -52,12 +54,14 @@ body {
   }
 }
 
+/* ========== Form Inputs ========== */
 input[type="text"] {
   padding: 0.7rem 1rem;
   border-radius: 8px;
   border: 1px solid #ccc;
   width: 100%;
   font-family: 'Montserrat', sans-serif;
+  font-size: var(--font-medium);
   transition: border-color 0.2s ease;
 }
 
@@ -67,11 +71,23 @@ input[type="text"]:focus {
   box-shadow: 0 0 0 3px rgba(255, 145, 77, 0.2);
 }
 
+/* ========== Button Defaults ========== */
 button {
   font-family: 'Montserrat', sans-serif;
   cursor: pointer;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
 }
 
+button:hover {
+  background-color: #ff7a26;
+}
+
+/* ========== Charts Hover ========== */
 canvas:hover {
   filter: brightness(1.05);
   transition: filter 0.2s ease;

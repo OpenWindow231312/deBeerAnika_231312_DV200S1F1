@@ -1,0 +1,10 @@
+.barChartBody {
+    width: 789.94px;
+    height: 332.19px;
+    background-color: white;
+    border-radius: 17.61px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
