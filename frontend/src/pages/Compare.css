@@ -5,7 +5,7 @@
 .compare-wrapper {
     width: 100%;
     min-height: 100vh;
-    background: url("../assets/background texture.svg") repeat;
+    background: url("../assets/Vegcolours.svg") repeat;
     background-size: cover;
     font-family: "Montserrat", sans-serif;
     display: flex;
@@ -15,6 +15,18 @@
     box-sizing: border-box;
     animation: fadeIn 0.6s ease-in-out;
 }
+
+/* White overlay behind all content
+.compare-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 0;
+} */
 
 @keyframes fadeIn {
     from {

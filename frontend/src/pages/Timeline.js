@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LineChart from "../components/LineChart";
-import Dropdown from "../components/Dropdown"; // Import the Dropdown component
+import Dropdown from "../components/Dropdown"; // Import the dropdown component
 import "../../src/index.css";
 import "./Timeline.css";
 
@@ -99,57 +99,42 @@ const Timeline = () => {
     labels: products.map((p) => p.product_name),
     datasets: [
       {
-        label: "Calories",
+        label: "Calories (kcal)",
         data: products.map((p) => p.nutriments?.["energy-kcal_100g"] || 0),
         borderColor: "#FF914D",
+        backgroundColor: "rgba(255, 145, 77, 0.2)",
         fill: false,
         tension: 0.3,
       },
       {
-        label: "Sugar",
-        data: products.map((p) => p.nutriments?.["sugars_100g"] || 0),
-        borderColor: "#FFCD56",
-        fill: false,
-        tension: 0.3,
-      },
-      {
-        label: "Fat",
-        data: products.map((p) => p.nutriments?.["fat_100g"] || 0),
+        label: "Fat (g)",
+        data: products.map((p) => p.nutriments?.fat_100g || 0),
         borderColor: "#4CAF50",
+        backgroundColor: "rgba(76, 175, 80, 0.2)",
         fill: false,
         tension: 0.3,
       },
-      {
-        label: "Salt",
-        data: products.map((p) => p.nutriments?.["salt_100g"] || 0),
-        borderColor: "#4BC0C0",
-        fill: false,
-        tension: 0.3,
-      },
-      {
-        label: "Protein",
-        data: products.map((p) => p.nutriments?.["proteins_100g"] || 0),
-        borderColor: "#9966FF",
-        fill: false,
-        tension: 0.3,
-      },
+      // Add more nutrients here if needed
     ],
   };
 
   return (
     <div className="timeline-page">
-      <h1>📈 Nutritional Timeline</h1>
+      <div className="timeline-container">
+        <h1>Nutritional Timeline</h1>
 
-      <div className="dropdown-wrapper">
-        <Dropdown
-          options={Object.keys(categoryProducts)}
-          selected={selectedCategory}
-          onSelect={setSelectedCategory}
-        />
-      </div>
+        <div className="dropdown-wrapper">
+          <label>Select a category: </label>
+          <Dropdown
+            options={Object.keys(categoryProducts)}
+            selected={selectedCategory}
+            onSelect={setSelectedCategory}
+          />
+        </div>
 
-      <div className="chart-section">
-        <LineChart data={chartData} loading={loading} />
+        <div className="chart-section">
+          <LineChart data={chartData} loading={loading} />
+        </div>
       </div>
     </div>
   );
