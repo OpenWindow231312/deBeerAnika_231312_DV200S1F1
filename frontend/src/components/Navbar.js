@@ -1,47 +1,33 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "../components/Navbar.css";
+import { NavLink } from "react-router-dom";
+import "./Navbar.css"; // optional for hover effects, etc.
 
-const Navbar = () => (
-  <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm px-4">
-    <div className="container-fluid">
-      <Link className="navbar-brand fw-bold text-uppercase" to="/">
-        NutriDash
-      </Link>
-
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-
-      <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav ms-auto">
-          <li className="nav-item">
-            <Link className="nav-link" to="/">
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/compare">
-              Compare
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/timeline">
-              Timeline
-            </Link>
-          </li>
-        </ul>
+const Navbar = () => {
+  return (
+    <nav className="custom-navbar d-flex align-items-center justify-content-between px-5 shadow-sm">
+      {/* Logo (you can replace with your own img if needed) */}
+      <div className="navbar-logo">
+        <img
+          src="https://placehold.co/113x67"
+          alt="FactFork Logo"
+          style={{ height: "67px" }}
+        />
       </div>
-    </div>
-  </nav>
-);
+
+      {/* Navigation links */}
+      <div className="navbar-links d-flex gap-5">
+        <NavLink to="/" className="nav-link-custom">
+          Home
+        </NavLink>
+        <NavLink to="/compare" className="nav-link-custom">
+          Compare
+        </NavLink>
+        <NavLink to="/timeline" className="nav-link-custom">
+          Trends
+        </NavLink>
+      </div>
+    </nav>
+  );
+};
 
 export default Navbar;

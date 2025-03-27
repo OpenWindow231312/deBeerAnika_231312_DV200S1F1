@@ -1,0 +1,23 @@
+.custom-navbar {
+    height: 80px;
+    background-color: white;
+    font-family: "Montserrat", sans-serif;
+}
+
+.navbar-links .nav-link-custom {
+    color: #000;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 28px;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.navbar-links .nav-link-custom:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+.navbar-links .nav-link-custom.active {
+    font-weight: 700;
+}
