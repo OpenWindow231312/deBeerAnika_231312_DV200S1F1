@@ -1,6 +1,7 @@
 import React, { useState, lazy, Suspense } from "react";
 import SearchBar from "../components/Searchbar";
 import SkeletonLoader from "../components/SkeletonLoader";
+import "../../src/index.css";
 import "./Compare.css";
 
 const BarChart = lazy(() => import("../components/BarChartCompare"));

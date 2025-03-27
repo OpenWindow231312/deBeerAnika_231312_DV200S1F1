@@ -1,62 +1,165 @@
-.home-container {
-    padding: 2rem;
-    background-color: #f8f9fa;
+.home-wrapper {
+    width: 100%;
     min-height: 100vh;
+    background: url("../assets/background texture.svg") repeat;
+    background-size: cover;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding: 40px 0;
+    box-sizing: border-box;
 }
 
-.dashboard-title {
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
+.dashboard-layout {
+    width: 1351px;
+    background-color: white;
+    position: relative;
 }
 
-.card-wrapper {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-    padding: 1.5rem;
+/* ---------------- Top Section ---------------- */
+.top-row {
+    display: flex;
+    width: 100%;
+    height: 333.78px;
+    gap: 20px;
 }
 
-/* Spinner */
+.left-section {
+    width: 540.99px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Search */
+.search-box {
+    height: 76.29px;
+    background-color: white;
+    border-radius: 17.48px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+}
+
+/* Title */
+.product-title-box {
+    height: 106.49px;
+    background-color: white;
+    border-radius: 17.48px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.product-title {
+    font-size: 52.13px;
+    font-weight: 500;
+    margin: 0;
+    color: #000;
+}
+
+/* Nutrient Cards */
+.summary-group {
+    height: 125.56px;
+    display: flex;
+    justify-content: space-between;
+    gap: 27px;
+}
+
+.summary-group>div {
+    width: 162.12px;
+    height: 123.97px;
+    background-color: white;
+    border-radius: 17.61px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ---------------- Bar Chart ---------------- */
+.bar-chart-container {
+    width: 789.94px;
+    height: 332.19px;
+    background-color: white;
+    border-radius: 17.61px;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bar-chart-container canvas {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* ---------------- Bottom Section ---------------- */
+.bottom-row {
+    display: flex;
+    gap: 25px;
+    margin-top: -48px;
+}
+
+/* Chart Containers */
+.pie-chart-container,
+.radar-chart-container {
+    width: 662.78px;
+    height: 572px;
+    background-color: white;
+    border-radius: 17.61px;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.12);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 70px;
+}
+
+/* Chart Body Classes – same as containers */
+.bar-chart-body {
+    width: 789.94px;
+    height: 332.19px;
+    background-color: white;
+    border-radius: 17.61px;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pie-chart-body,
+.radar-chart-body {
+    width: 662.78px;
+    height: 572px;
+    background-color: white;
+    border-radius: 17.61px;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.12);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 70px;
+}
+
+.bar-chart-body canvas,
+.pie-chart-body canvas,
+.radar-chart-body canvas {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* ---------------- Spinner ---------------- */
 .spinner {
-    width: 50px;
-    height: 50px;
-    margin: 2rem auto;
-    border: 6px solid #ccc;
-    border-top: 6px solid #36a2eb;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Summary Cards Row */
-.summary-card-row {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-/* Three Charts in One Row */
-.three-chart-row {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-}
-
-.chart-col {
-    flex: 1 1 32%;
-}
-
-.chart-title {
-    font-size: 16px;
-    margin-bottom: 1rem;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 40px;
+    font-size: 20px;
     font-weight: 500;
 }

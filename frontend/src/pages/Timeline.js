@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LineChart from "../components/LineChart";
+import "../../src/index.css";
 import "./Timeline.css";
 
 const categoryProducts = {

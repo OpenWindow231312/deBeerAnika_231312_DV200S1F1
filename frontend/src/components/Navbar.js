@@ -1,33 +1,80 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import "./Navbar.css"; // optional for hover effects, etc.
+import logo from "../assets/logo.svg";
+import "./Navbar.css";
 
 const Navbar = () => {
   return (
-    <nav className="custom-navbar d-flex align-items-center justify-content-between px-5 shadow-sm">
-      {/* Logo (you can replace with your own img if needed) */}
-      <div className="navbar-logo">
-        <img
-          src="https://placehold.co/113x67"
-          alt="FactFork Logo"
-          style={{ height: "67px" }}
-        />
+    <div className="custom-navbar">
+      <img src={logo} alt="FactFork Logo" className="custom-logo" />
+      <div className="custom-links">
+        <NavLink to="/" className="custom-link">Home</NavLink>
+        <NavLink to="/compare" className="custom-link">Compare</NavLink>
+        <NavLink to="/timeline" className="custom-link">Trends</NavLink>
       </div>
-
-      {/* Navigation links */}
-      <div className="navbar-links d-flex gap-5">
-        <NavLink to="/" className="nav-link-custom">
-          Home
-        </NavLink>
-        <NavLink to="/compare" className="nav-link-custom">
-          Compare
-        </NavLink>
-        <NavLink to="/timeline" className="nav-link-custom">
-          Trends
-        </NavLink>
-      </div>
-    </nav>
+    </div>
   );
 };
 
 export default Navbar;
+
+
+// const Navbar = () => {
+//   const [isOpen, setIsOpen] = useState(false);
+
+//   return (
+//     <>
+//       <nav className={styles.navbar}>
+//         {/* Logo */}
+//         <img src={logo} alt="Logo" className={styles.logo} />
+
+//         {/* Hamburger Icon */}
+//         <div
+//           className={`${styles.hamburger} ${isOpen ? styles.open : ""}`}
+//           onClick={() => setIsOpen(!isOpen)}
+//         >
+//           <span></span>
+//           <span></span>
+//           <span></span>
+//         </div>
+
+//         {/* Mobile Menu */}
+//         <div className={`${styles.navLinks} ${isOpen ? styles.show : ""}`}>
+//           <Link
+//             to="/"
+//             className={styles.navItem}
+//             onClick={() => setIsOpen(false)}
+//           >
+//             Home
+//           </Link>
+//           <Link
+//             to="/dashboard"
+//             className={styles.navItem}
+//             onClick={() => setIsOpen(false)}
+//           >
+//             Dashboard
+//           </Link>
+//           <Link
+//             to="/compare"
+//             className={styles.navItem}
+//             onClick={() => setIsOpen(false)}
+//           >
+//             Compare
+//           </Link>
+//           <Link
+//             to="/trends"
+//             className={styles.navItem}
+//             onClick={() => setIsOpen(false)}
+//           >
+//             Trends
+//           </Link>
+//         </div>
+//       </nav>
+
+//       {/* Add a div that shifts content down when menu is open */}
+//       <div className={isOpen ? styles.contentShift : ""}></div>
+//     </>
+//   );
+// };
+
+// export default Navbar;

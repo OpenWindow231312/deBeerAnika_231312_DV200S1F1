@@ -1,12 +1,12 @@
-import React, { useEffect, useState, lazy, Suspense } from 'react';
-import axios from 'axios';
-import SearchBar from '../components/Searchbar';
-import SummaryCard from '../components/SummaryCard';
-import './Home.css';
+import React, { useEffect, useState, lazy, Suspense } from "react";
+import axios from "axios";
+import SearchBar from "../components/Searchbar";
+import SummaryCard from "../components/SummaryCard";
+import "./Home.css";
 
-const BarChart = lazy(() => import('../components/BarChart'));
-const PieChart = lazy(() => import('../components/PieChart'));
-const RadarChartSingle = lazy(() => import('../components/RadarChartSingle'));
+const BarChart = lazy(() => import("../components/BarChart"));
+const PieChart = lazy(() => import("../components/PieChart"));
+const RadarChartSingle = lazy(() => import("../components/RadarChartSingle"));
 
 const Home = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -19,7 +19,7 @@ const Home = () => {
       const res = await axios.get(url);
       setSelectedProduct(res.data.products?.[0] || null);
     } catch (err) {
-      console.error('Default fetch failed:', err.message);
+      console.error("Default fetch failed:", err.message);
     } finally {
       setLoading(false);
     }
@@ -32,45 +32,64 @@ const Home = () => {
   const nutriments = selectedProduct?.nutriments || {};
 
   return (
-    <div className="home-container">
-      <h1 className="dashboard-title">🍽️ Food Dashboard</h1>
+    <div className="home-wrapper">
+      <div className="dashboard-layout">
+        {/* Top Row */}
+        <div className="top-row">
+          {/* Left Section */}
+          <div className="left-section">
+            <div className="search-box">
+              <SearchBar onSelect={setSelectedProduct} />
+            </div>
 
-      <div className="card-wrapper mb-4">
-        <SearchBar onSelect={setSelectedProduct} />
-      </div>
+            <div className="product-title-box">
+              <h1 className="product-title">
+                {selectedProduct?.product_name || "PRODUCT"}
+              </h1>
+            </div>
 
-      {loading ? (
-        <div className="spinner"></div>
-      ) : selectedProduct ? (
-        <>
-          <div className="card-wrapper summary-card-row mb-4">
-            <SummaryCard title="Product" value={selectedProduct.product_name} />
-            <SummaryCard title="Calories" value={`${nutriments['energy-kcal_100g'] || 0} kcal`} />
-            <SummaryCard title="Sugar" value={`${nutriments.sugars_100g || 0} g`} />
+            <div className="summary-group">
+              <SummaryCard
+                title="CALORIES"
+                value={`${nutriments["energy-kcal_100g"] || 0}`}
+              />
+              <SummaryCard title="FAT" value={`${nutriments.fat_100g || 0}g`} />
+              <SummaryCard
+                title="SUGAR"
+                value={`${nutriments.sugars_100g || 0}g`}
+              />
+            </div>
           </div>
 
-          <Suspense fallback={<div className="spinner"></div>}>
-            <div className="three-chart-row">
-              <div className="card-wrapper chart-col">
-                <h5 className="chart-title">Nutrition Breakdown (Bar)</h5>
+          {/* Bar Chart Widget */}
+          <div className="bar-chart-container">
+            <div className="bar-chart-body">
+              <Suspense fallback={<div className="spinner"></div>}>
                 <BarChart product={selectedProduct} />
-              </div>
-
-              <div className="card-wrapper chart-col">
-                <h5 className="chart-title">Macro Ratio (Pie)</h5>
-                <PieChart product={selectedProduct} />
-              </div>
-
-              <div className="card-wrapper chart-col">
-                <h5 className="chart-title">Additive Awareness</h5>
-                <RadarChartSingle product={selectedProduct} />
-              </div>
+              </Suspense>
             </div>
-          </Suspense>
-        </>
-      ) : (
-        <p>No product selected.</p>
-      )}
+          </div>
+        </div>
+
+        {/* Bottom Row */}
+        <div className="bottom-row">
+          <div className="pie-chart-container">
+            <div className="pie-chart-body">
+              <Suspense fallback={<div className="spinner"></div>}>
+                <PieChart product={selectedProduct} />
+              </Suspense>
+            </div>
+          </div>
+
+          <div className="radar-chart-container">
+            <div className="radar-chart-body">
+              <Suspense fallback={<div className="spinner"></div>}>
+                <RadarChartSingle product={selectedProduct} />
+              </Suspense>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

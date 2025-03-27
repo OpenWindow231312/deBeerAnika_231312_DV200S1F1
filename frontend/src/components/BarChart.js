@@ -49,7 +49,7 @@ const BarChart = ({ product }) => {
     <div className="card mt-4 shadow-sm">
       <div className="card-body">
         <h4 className="card-title fw-bold text-muted mb-4">
-          🍫 Nutrition Breakdown
+          Nutrition Breakdown
         </h4>
         <div style={{ minHeight: "300px" }}>
           <Bar data={data} options={options} />

@@ -58,7 +58,7 @@ const RadarChartSingle = ({ product }) => {
     <div className="card mt-4 shadow-sm">
       <div className="card-body">
         <h4 className="card-title fw-bold text-muted mb-4">
-          🧭 Additive & Nutrition Profile
+          Additive & Nutrition Profile
         </h4>
         <div style={{ minHeight: "300px" }}>
           <Radar data={data} options={options} />

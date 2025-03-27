@@ -37,7 +37,7 @@ const PieChart = ({ product }) => {
     <div className="card mt-4 shadow-sm">
       <div className="card-body">
         <h4 className="card-title fw-bold text-muted mb-4">
-          🥧 Macronutrient Distribution
+          Macronutrient Ratio
         </h4>
         <div style={{ minHeight: "300px" }}>
           <Pie data={data} options={options} />
