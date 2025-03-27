@@ -107,8 +107,10 @@
     box-shadow: 0px 2px 10px rgba(0, 128, 0, 0.12);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    /* align text left */
     justify-content: center;
+    padding-left: 16px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -117,15 +119,31 @@
     box-shadow: 0px 4px 16px rgba(0, 128, 0, 0.2);
 }
 
+.summary-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #FF914D;
+    margin-bottom: 8px;
+}
+
+.summary-value {
+    font-size: 30.34px;
+    font-weight: 500;
+    color: #004d26;
+}
+
 /* ---------------- Chart Headings ---------------- */
-.chart-heading {
+/* ---------------- Chart Titles (Unified) ---------------- */
+.chart-title {
     font-size: 19.07px;
     font-weight: 500;
     color: #004d26;
     font-family: "Montserrat", sans-serif;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     width: 100%;
     text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* ---------------- Chart Containers ---------------- */

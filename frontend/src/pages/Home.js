@@ -1,7 +1,6 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import axios from "axios";
 import SearchBar from "../components/Searchbar";
-import SummaryCard from "../components/SummaryCard";
 import "./Home.css";
 
 const BarChart = lazy(() => import("../components/BarChart"));
@@ -48,15 +47,24 @@ const Home = () => {
             </div>
 
             <div className="summary-group">
-              <SummaryCard
-                title="CALORIES"
-                value={`${nutriments["energy-kcal_100g"] || 0}`}
-              />
-              <SummaryCard title="FAT" value={`${nutriments.fat_100g || 0}g`} />
-              <SummaryCard
-                title="SUGAR"
-                value={`${nutriments.sugars_100g || 0}g`}
-              />
+              <div>
+                <div className="summary-title">CALORIES</div>
+                <div className="summary-value">
+                  {nutriments["energy-kcal_100g"] || 0}
+                </div>
+              </div>
+
+              <div>
+                <div className="summary-title">FAT</div>
+                <div className="summary-value">{nutriments.fat_100g || 0}g</div>
+              </div>
+
+              <div>
+                <div className="summary-title">SUGAR</div>
+                <div className="summary-value">
+                  {nutriments.sugars_100g || 0}g
+                </div>
+              </div>
             </div>
           </div>
 
