@@ -1,107 +1,132 @@
-# FactFork - Product Comparison App
+# 🥗 FactFork – Product Comparison & Nutritional Insights App
 
-## Overview
+<img width="2880" height="1620" alt="FactFork Screenshot" src="https://github.com/user-attachments/assets/placeholder.png" />
 
-**FactFork** is a product comparison app that allows users to compare two products based on their nutritional values. The app allows users to search for products, view key product details, and compare attributes such as calories, fat, protein, and more. The data is retrieved from the [Open Food Facts API](https://world.openfoodfacts.org/), and various charts (bar charts, pie charts, and radar charts) are used to display nutritional information.
+> A smart nutritional comparison tool powered by the Open Food Facts API and dynamic data visualisation.
 
-## Features
+<p align="center">
+  <img src="https://img.shields.io/badge/Frontend-React-61DAFB?logo=react&logoColor=white" />
+  <img src="https://img.shields.io/badge/API-Open%20Food%20Facts-44CC11?logo=leaflet&logoColor=white" />
+  <img src="https://img.shields.io/badge/Charts-Chart.js-FF6384?logo=chartdotjs&logoColor=white" />
+</p>
 
-- **Product Search**: Allows users to search for products.
-- **Product Comparison**: Compare two products side by side.
-- **Nutritional Insights**: Displays charts for calories, fat, sugar, protein, and other nutritional data.
-- **Local Storage**: Stores selected products in local storage for persistence across sessions.
-- **Dynamic Visualization**: Uses dynamic charts (BarChart, PieChart, RadarChart) to visualize product comparison.
+<p align="center">
+  <img src="https://img.shields.io/badge/Library-Axios-5A29E4?logo=axios&logoColor=white" />
+  <img src="https://img.shields.io/badge/Storage-Local%20Storage-000000" />
+  <img src="https://img.shields.io/badge/License-MIT-green" />
+</p>
 
-## Technologies Used
+---
 
-- **React.js**: Front-end library to build user interfaces.
-- **React Router**: For routing between different pages (if applicable).
-- **Axios**: For making API requests.
-- **Chart.js**: For data visualization (Bar, Pie, and Radar charts).
-- **CSS**: For styling and layout.
-- **React Suspense and Lazy Loading**: For efficient loading of chart components.
-- **Local Storage**: For storing user-selected products.
-- **Open Food Facts API**: For fetching product data.
+## 2.1 Project Header
 
-## API Documentation
+### Project title block
 
-The app uses the [Open Food Facts API](https://world.openfoodfacts.org/) to fetch product nutritional information.
+- **Name:** FactFork – Product Comparison App  
+- **Type of digital solution:** Nutritional comparison & data visualisation web app  
+- **Primary purpose:** Help users compare food products by nutritional value using charts and dynamic insights  
+- **Author:** Anika de Beer  
 
-## Installation
+### Table of contents
+
+1. [2.1 Project Header](#21-project-header)  
+2. [2.2 About The Project](#22-about-the-project)  
+3. [2.3 Getting Started](#23-getting-started)  
+4. [2.4 Project Features](#24-project-features)  
+5. [2.5 Development Process](#25-development-process)  
+6. [2.6 Final Outcome](#26-final-outcome)  
+7. [2.7 Conclusion](#27-conclusion)  
+8. [2.8 Footer](#28-footer)
+
+---
+
+## 2.2 About The Project
+
+### Short project description
+
+**FactFork** is an interactive product comparison tool that helps users visually compare food products based on detailed nutritional data. By integrating the **Open Food Facts API**, the app retrieves real-world nutrition facts and presents them in a digestible, user-friendly interface.
+
+Users can search products, select two items, and instantly compare calories, fat, protein, sugars, and more. The analysis is visualised through **Bar Charts, Pie Charts, and Radar Charts**, making the data clear and engaging.
+
+The goal of the project is to turn complex nutritional information into something intuitive, accessible, and useful for everyday decision-making.
+
+### Built with
+
+- **React.js** – interactive components and rendering  
+- **Chart.js** – for dynamic data visualisation  
+- **Axios** – API data fetching  
+- **React Router (optional)** – navigation between pages  
+- **CSS** – styling and layout  
+- **React Suspense / Lazy Loading** – optimised chart loading  
+- **Local Storage** – stores selected products for persistence  
+- **Open Food Facts API** – external nutrition data source  
+
+---
+
+## 2.3 Getting Started
 
 ### Prerequisites
 
-Before you begin, ensure you have the following installed:
-- **Node.js** (v14 or later)
-- **npm** (Node package manager)
+- Node.js (v14 or later)  
+- npm  
 
-### Clone the Repository
+### Installation
 
 ```bash
 git clone https://github.com/OpenWindow231312/deBeerAnika_231312_DV200S1F1.git
 cd deBeerAnika_231312_DV200S1F1
-
-Install Dependencies
-
-Run the following command to install the necessary dependencies:
-
 npm install
-
-Development
-
-Run the Application Locally
-
-Once dependencies are installed, run the app in development mode:
-
 npm start
+```
 
-The application will be accessible at http://localhost:3000.
+---
 
-Building the App
+## 2.4 Project Features
 
-To create a production build of the app, run:
+- Product search powered by Open Food Facts  
+- Compare two products side-by-side  
+- Dynamic charts (Bar, Pie, Radar)  
+- Local Storage persistence  
+- Visual nutritional insights  
 
-npm run build
+---
 
-This will generate a build directory with the production-optimized version of your app.
+## 2.5 Development Process
 
-Usage
-	1.	Search for Products: Use the search bar to find products by name.
-	2.	Select Products to Compare: After selecting two products, their nutritional information will be displayed side by side.
-	3.	View Nutritional Charts: The comparison data will be visualized in bar charts, pie charts, and radar charts.
-	4.	Compare Meta Data: Quantity and category information will be displayed for each product.
+- API integration using Axios  
+- Chart.js visualisation  
+- State management via React  
+- Lazy loading for charts  
+- Clean component-based structure  
 
-Structure
+---
 
-/src
-  /components
-    - BarChartCompare.js
-    - PieChart.js
-    - RadarChartCompare.js
-    - WidgetHeaderCompare.js
-    - Searchbar.js
-    - SkeletonLoader.js
-  /pages
-    - Compare.js
-    - Timeline.js
-  /styles
-    - Compare.css
-    - Timeline.css
-  /assets
-    - Vegcolours.svg
-  App.js
-  index.js
-  package.json
-  README.md
+## 2.6 Final Outcome
 
-Contributing
+FactFork delivers an intuitive, visual nutritional comparison experience using real-world API data and dynamic charts.
 
-We welcome contributions! If you’d like to improve this app or fix bugs, please fork the repository and submit a pull request. Be sure to follow the project’s code of conduct and include detailed descriptions of any changes.
+---
 
-License
+## 2.7 Conclusion
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+FactFork showcases how external APIs and data visualisation can turn raw nutritional information into meaningful insights.
 
-Author
+---
 
-This project was created by Anika de Beer, student number 231312, at Open Window Institute.
+## 2.8 Footer
+
+### License
+
+This project is licensed under the MIT License.
+
+### Author
+
+**Anika de Beer**  
+Student Number: **231312**  
+Open Window Institute  
+
+### Acknowledgements
+
+- Open Food Facts API  
+- Chart.js  
+- Peers and mentors  
