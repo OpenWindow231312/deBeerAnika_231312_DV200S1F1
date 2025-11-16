@@ -44,22 +44,51 @@
 
 ### Short project description
 
-**FactFork** is an interactive product comparison tool that helps users visually compare food products based on detailed nutritional data. By integrating the **Open Food Facts API**, the app retrieves real-world nutrition facts and presents them in a digestible, user-friendly interface.
+**FactFork** is an interactive product comparison tool that retrieves nutritional data from the **Open Food Facts API** and turns it into visual insights. Users can search for products, select two options, and instantly compare calories, fats, sugars, proteins, and more using **Bar Charts, Pie Charts, and Radar Charts**.
 
-Users can search products, select two items, and instantly compare calories, fat, protein, sugars, and more. The analysis is visualised through **Bar Charts, Pie Charts, and Radar Charts**, making the data clear and engaging.
+By integrating live API data with rich visualisation, FactFork helps users make more informed food choices.
 
-The goal of the project is to turn complex nutritional information into something intuitive, accessible, and useful for everyday decision-making.
+---
 
-### Built with
+## 🔍 Open Food Facts API (Data Source)
 
-- **React.js** – interactive components and rendering  
-- **Chart.js** – for dynamic data visualisation  
-- **Axios** – API data fetching  
-- **React Router (optional)** – navigation between pages  
-- **CSS** – styling and layout  
-- **React Suspense / Lazy Loading** – optimised chart loading  
-- **Local Storage** – stores selected products for persistence  
-- **Open Food Facts API** – external nutrition data source  
+FactFork relies on the **Open Food Facts Public API**, a global open database of food products.
+
+### 📌 Base URL
+```
+https://world.openfoodfacts.org
+```
+
+### 📌 Search Endpoint
+```
+GET /cgi/search.pl?search_terms={query}&search_simple=1&action=process&json=1
+```
+
+### Example Response
+```json
+{
+  "products": [
+    {
+      "product_name": "Oreo Original",
+      "image_url": "https://...",
+      "nutriments": {
+        "energy-kcal_100g": 480,
+        "fat_100g": 20,
+        "sugars_100g": 38,
+        "proteins_100g": 4.3,
+        "carbohydrates_100g": 69
+      },
+      "quantity": "154g",
+      "categories": "Snacks, Biscuits"
+    }
+  ]
+}
+```
+
+### 📌 Barcode Lookup Endpoint
+```
+GET /api/v0/product/{barcode}.json
+```
 
 ---
 
@@ -67,7 +96,7 @@ The goal of the project is to turn complex nutritional information into somethin
 
 ### Prerequisites
 
-- Node.js (v14 or later)  
+- Node.js  
 - npm  
 
 ### Installation
