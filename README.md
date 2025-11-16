@@ -1,6 +1,6 @@
 # 🥗 FactFork – Nutritional Product Comparison & Insights App
 
-<img width="2880" height="1620" alt="FactFork Screenshot" src="https://github.com/user-attachments/assets/placeholder.png" />
+<img width="883" height="517" alt="Ovddderview" src="https://github.com/user-attachments/assets/72ad8c0e-b5cb-4261-8a33-bd8017a8ff77" />
 
 > A smart nutritional comparison tool powered by the **Open Food Facts API**, featuring **dynamic data visualisation**, product metadata comparison, and intuitive React UI components.
 
@@ -102,19 +102,27 @@ npm run build
 
 # Usage Examples
 
+
 ### Compare "Corn Flakes" vs "Oats"
 - Search → Select → View nutritional breakdown  
 - Charts display calories, sugars, protein, carbs  
+
+<img width="883" height="517" alt="compare 4" src="https://github.com/user-attachments/assets/64f8bd43-7c0b-46ac-b355-656e4f000a06" />
+
 
 ### Compare via barcodes
 ```
 https://world.openfoodfacts.org/api/v0/product/6001065031245.json
 ```
 
-### Compare "Coke Zero" vs "Coca-Cola"
-Radar chart shows:
-- Zero sugar vs high sugar  
-- Zero calories vs 139 kcal  
+### Product Overview example, "Coca-Cola"
+See the nutrional values in depth, of one specific product. 
+<img width="883" height="517" alt="compare 2" src="https://github.com/user-attachments/assets/84cd92b2-6f5d-42c3-812e-b5a82841b200" />
+
+### Nutritional Trends overview
+See the difference in sugar, carbohydrates, fat ect, of the most popular foods, like ice cream and soda. 
+<img width="883" height="517" alt="compare 1" src="https://github.com/user-attachments/assets/6cbae3f6-3b09-43fc-b4f3-2bd8af8dd817" />
+
 
 ---
 
