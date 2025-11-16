@@ -180,7 +180,4 @@ MIT License – see LICENSE file.
 
 ---
 
-# Author
-**Anika de Beer**  
-Student Number **231312**  
-Open Window Institute
+<img width="1599" height="428" alt="Desktop - 2" src="https://github.com/user-attachments/assets/0183174e-a324-43af-9f95-448b3da5e100" />
