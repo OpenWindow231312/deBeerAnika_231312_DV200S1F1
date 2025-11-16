@@ -1,8 +1,8 @@
-# 🥗 FactFork – Product Comparison & Nutritional Insights App
+# 🥗 FactFork – Nutritional Product Comparison & Insights App
 
 <img width="2880" height="1620" alt="FactFork Screenshot" src="https://github.com/user-attachments/assets/placeholder.png" />
 
-> A smart nutritional comparison tool powered by the Open Food Facts API and dynamic data visualisation.
+> A smart nutritional comparison tool powered by the **Open Food Facts API**, featuring **dynamic data visualisation**, product metadata comparison, and intuitive React UI components.
 
 <p align="center">
   <img src="https://img.shields.io/badge/Frontend-React-61DAFB?logo=react&logoColor=white" />
@@ -18,86 +18,60 @@
 
 ---
 
-## 2.1 Project Header
+# 📘 Table of Contents
 
-### Project title block
+1. Project Header  
+2. About The Project  
+3. Getting Started  
+4. Project Features  
+5. Usage Examples  
+6. Development Process  
+7. Final Outcome  
+8. Conclusion  
+9. Project Structure  
+10. Contributing  
+11. License  
+12. Author  
 
+---
+
+# Project Header
+
+### Project Title Block
 - **Name:** FactFork – Product Comparison App  
-- **Type of digital solution:** Nutritional comparison & data visualisation web app  
-- **Primary purpose:** Help users compare food products by nutritional value using charts and dynamic insights  
+- **Type:** Nutritional comparison & data visualisation web app  
+- **Purpose:** Help users compare food products using API data & charts  
 - **Author:** Anika de Beer  
 
-### Table of contents
+---
 
-1. [2.1 Project Header](#21-project-header)  
-2. [2.2 About The Project](#22-about-the-project)  
-3. [2.3 Getting Started](#23-getting-started)  
-4. [2.4 Project Features](#24-project-features)  
-5. [2.5 Development Process](#25-development-process)  
-6. [2.6 Final Outcome](#26-final-outcome)  
-7. [2.7 Conclusion](#27-conclusion)  
-8. [2.8 Footer](#28-footer)
+# About The Project
+
+FactFork is a **React-based web app** that compares the nutritional values of two products using real-time data from the **Open Food Facts API**.  
+Users search, select products, and immediately get interactive visual comparisons.
 
 ---
 
-## 2.2 About The Project
+# 🔍 Open Food Facts API
 
-### Short project description
-
-**FactFork** is an interactive product comparison tool that retrieves nutritional data from the **Open Food Facts API** and turns it into visual insights. Users can search for products, select two options, and instantly compare calories, fats, sugars, proteins, and more using **Bar Charts, Pie Charts, and Radar Charts**.
-
-By integrating live API data with rich visualisation, FactFork helps users make more informed food choices.
-
----
-
-## 🔍 Open Food Facts API (Data Source)
-
-FactFork relies on the **Open Food Facts Public API**, a global open database of food products.
-
-### 📌 Base URL
+**Base URL**
 ```
 https://world.openfoodfacts.org
 ```
 
-### 📌 Search Endpoint
+### Search Endpoint
 ```
 GET /cgi/search.pl?search_terms={query}&search_simple=1&action=process&json=1
 ```
 
-### Example Response
-```json
-{
-  "products": [
-    {
-      "product_name": "Oreo Original",
-      "image_url": "https://...",
-      "nutriments": {
-        "energy-kcal_100g": 480,
-        "fat_100g": 20,
-        "sugars_100g": 38,
-        "proteins_100g": 4.3,
-        "carbohydrates_100g": 69
-      },
-      "quantity": "154g",
-      "categories": "Snacks, Biscuits"
-    }
-  ]
-}
-```
-
-### 📌 Barcode Lookup Endpoint
+### Barcode Lookup
 ```
 GET /api/v0/product/{barcode}.json
 ```
 
 ---
 
-## 2.3 Getting Started
-
-### Prerequisites
-
-- Node.js  
-- npm  
+# Getting Started
 
 ### Installation
 
@@ -108,54 +82,102 @@ npm install
 npm start
 ```
 
+### Build
+
+```bash
+npm run build
+```
+
 ---
 
-## 2.4 Project Features
+# Project Features
 
-- Product search powered by Open Food Facts  
+- Product search (API powered)  
 - Compare two products side-by-side  
 - Dynamic charts (Bar, Pie, Radar)  
 - Local Storage persistence  
-- Visual nutritional insights  
+- Clean UI components  
 
 ---
 
-## 2.5 Development Process
+# Usage Examples
 
-- API integration using Axios  
-- Chart.js visualisation  
-- State management via React  
-- Lazy loading for charts  
-- Clean component-based structure  
+### Compare "Corn Flakes" vs "Oats"
+- Search → Select → View nutritional breakdown  
+- Charts display calories, sugars, protein, carbs  
 
----
+### Compare via barcodes
+```
+https://world.openfoodfacts.org/api/v0/product/6001065031245.json
+```
 
-## 2.6 Final Outcome
-
-FactFork delivers an intuitive, visual nutritional comparison experience using real-world API data and dynamic charts.
-
----
-
-## 2.7 Conclusion
-
-FactFork showcases how external APIs and data visualisation can turn raw nutritional information into meaningful insights.
+### Compare "Coke Zero" vs "Coca-Cola"
+Radar chart shows:
+- Zero sugar vs high sugar  
+- Zero calories vs 139 kcal  
 
 ---
 
-## 2.8 Footer
+# Development Process
 
-### License
+- Axios for API calls  
+- Chart.js for visualisation  
+- React state management  
+- Skeleton loaders for smoother UX  
+- Component-based architecture  
 
-This project is licensed under the MIT License.
+---
 
-### Author
+# Final Outcome
 
-**Anika de Beer**  
-Student Number: **231312**  
-Open Window Institute  
+FactFork provides easy-to-understand nutritional insights through live data and meaningful visualisation.
 
-### Acknowledgements
+---
 
-- Open Food Facts API  
-- Chart.js  
-- Peers and mentors  
+# Conclusion
+
+This project demonstrates how API integration + React + visualisation can empower healthier decision‑making.
+
+---
+
+# Project Structure
+
+```
+/src
+  /components
+    BarChartCompare.js
+    PieChart.js
+    RadarChartCompare.js
+    WidgetHeaderCompare.js
+    Searchbar.js
+    SkeletonLoader.js
+  /pages
+    Compare.js
+    Timeline.js
+  /styles
+    Compare.css
+    Timeline.css
+  /assets
+    Vegcolours.svg
+  App.js
+  index.js
+  package.json
+  README.md
+```
+
+---
+
+# Contributing
+
+Contributions are welcome!  
+Fork → Improve → Pull request.
+
+---
+
+# License
+
+MIT License – see LICENSE file.
+
+---
+
+<img width="1599" height="428" alt="Desktop - 2" src="https://github.com/user-attachments/assets/0183174e-a324-43af-9f95-448b3da5e100" />
