@@ -35,9 +35,7 @@
 
 ---
 
-# Project Header
-
-### Project Title Block
+### Fact Fork
 - **Name:** FactFork – Product Comparison App  
 - **Type:** Nutritional comparison & data visualisation web app  
 - **Purpose:** Help users compare food products using API data & charts  
